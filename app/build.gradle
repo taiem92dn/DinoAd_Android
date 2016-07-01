@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "vn.dinosys.dinoad"
+        minSdkVersion 21
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    supportLibVersion = '24.0.0'
+    butterknifeLibVersion = '8.1.0'
+    calligraphyLibVersion = '2.2.0'
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    // Android Support AppCompat
+    compile "com.android.support:appcompat-v7:${supportLibVersion}"
+    compile "com.android.support:design:${supportLibVersion}"
+    compile "com.android.support:support-v4:${supportLibVersion}"
+    compile "com.android.support:recyclerview-v7:${supportLibVersion}"
+    // Butter Knife
+    compile "com.jakewharton:butterknife:${butterknifeLibVersion}"
+    apt "com.jakewharton:butterknife-compiler:${butterknifeLibVersion}"
+    // Fonts Support
+    compile "uk.co.chrisjenx:calligraphy:${calligraphyLibVersion}"
+    compile 'com.google.android.gms:play-services-maps:9.0.2'
+}
