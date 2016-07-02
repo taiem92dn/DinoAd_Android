@@ -38,16 +38,17 @@ android {
         archivesBaseName = "DinoAdd"
         versionName "1.0"
         versionCode gitCommitCount
-        signingConfig signingConfigs.release_key
+        signingConfig signingConfigs.debug_key
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release_key
         }
         debug {
+            minifyEnabled false
             signingConfig signingConfigs.debug_key
         }
     }
@@ -67,12 +68,45 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
 }
 
 ext {
+    // Android Support AppCompat
     supportLibVersion = '24.0.0'
+    // Butter Knife
     butterknifeLibVersion = '8.1.0'
+    // Fonts Support
     calligraphyLibVersion = '2.2.0'
+    // HTTP Connection
+    retrofit2LibVersion = '2.1.0'
+    okhttpLoggingInterceptorLibVersion = '3.3.1'
+    // Dependence Injection
+    daggerLibVersion = '2.2'
+    // Annotation & Reactive
+    rxAndroidLibVersion = '1.2.1'
+    rxJavaLibVersion = '1.1.6'
+    javaxAnnotationLibVersion = '1.0'
+    // Google Play Services
+    playServiceLibVersion = '9.0.2'
+    // Json
+    gsonLibVersion = '2.7'
+    // Image
+    glideLibVersion = '3.7.0'
+
 }
 
 dependencies {
@@ -88,5 +122,21 @@ dependencies {
     apt "com.jakewharton:butterknife-compiler:${butterknifeLibVersion}"
     // Fonts Support
     compile "uk.co.chrisjenx:calligraphy:${calligraphyLibVersion}"
-    compile 'com.google.android.gms:play-services-maps:9.0.2'
+    // Google Maps
+    compile "com.google.android.gms:play-services-maps:${playServiceLibVersion}"
+    // Dependence Injection
+    compile "com.google.dagger:dagger-compiler:${daggerLibVersion}"
+    compile "com.google.dagger:dagger:${daggerLibVersion}"
+    // Annotation & Reactive
+    compile "javax.annotation:jsr250-api:${javaxAnnotationLibVersion}"
+    compile "io.reactivex:rxandroid:${rxAndroidLibVersion}"
+    compile "io.reactivex:rxjava:${rxJavaLibVersion}"
+    // HTTP Connection
+    compile "com.squareup.retrofit2:retrofit:${retrofit2LibVersion}"
+    compile "com.squareup.retrofit2:converter-gson:${retrofit2LibVersion}"
+    compile "com.squareup.okhttp3:logging-interceptor:${okhttpLoggingInterceptorLibVersion}"
+    // Json
+    compile "com.google.code.gson:gson:${gsonLibVersion}"
+    // Image
+    compile "com.github.bumptech.glide:glide:${glideLibVersion}"
 }
