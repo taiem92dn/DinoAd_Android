@@ -4,6 +4,12 @@ import android.app.WallpaperManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +27,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 import vn.dinosys.dinoad.R;
 import vn.dinosys.dinoad.data.net.model.Banner;
 import vn.dinosys.dinoad.di.component.AppComponent;
@@ -34,6 +41,8 @@ import vn.dinosys.dinoad.ui.view.ILockScreenView;
  * Project: DinoAd
  */
 public class LockScreenFragment extends BaseFragment implements ILockScreenView {
+
+    private static final String TAG = LockScreenFragment.class.getName();
 
     @Inject
     LockScreenPresenter mLockScreenPresenter;
@@ -49,6 +58,9 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
 
     @BindView(R.id.textSlideUnlock)
     ShimmerTextView mTextSlideToUnlock;
+
+    @BindView(R.id.viewPageBanner)
+    VerticalViewPager mViewPageBanner;
 
     public static LockScreenFragment newInstance() {
         return new LockScreenFragment();
@@ -75,6 +87,28 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
         //imgBackground.setScaleType(ImageView.ScaleType.CENTER_CROP);
         mImgBackground.setImageDrawable(drawable);
 
+        updateTextDateTime();
+
+        setupViewPageBanner();
+
+        Shimmer shimmer = new Shimmer();
+        shimmer.setDuration(2000).start(mTextSlideToUnlock);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume");
+        updateTextDateTime();
+    }
+
+    private void initialize() {
+        this.getComponent(AppComponent.class).inject(this);
+        mLockScreenPresenter.setView(this);
+        //mLockScreenPresenter.loadBanners();
+    }
+
+    private void updateTextDateTime() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdfTime = new SimpleDateFormat("h:mm", Locale.getDefault());
         String time = sdfTime.format(calendar.getTime());
@@ -87,20 +121,138 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
         sdfTime = new SimpleDateFormat("EE, dd MMM", Locale.getDefault());
         String date = sdfTime.format(calendar.getTime());
         mTextDate.setText(date);
-
-        Shimmer shimmer = new Shimmer();
-        shimmer.start(mTextSlideToUnlock);
-
     }
 
-    private void initialize() {
-        this.getComponent(AppComponent.class).inject(this);
-        mLockScreenPresenter.setView(this);
-        //mLockScreenPresenter.loadBanners();
+    private void setupViewPageBanner() {
+        mViewPageBanner.setPageTransformer(true, new ViewPager.PageTransformer() {
+
+            private static final float MIN_SCALE = 0.75f;
+
+            public void transformPage(View view, float position) {
+                int pageWidth = view.getWidth();
+
+                if (position < -1) { // [-Infinity,-1)
+                    // This page is way off-screen to the left.
+                    view.setAlpha(0);
+
+                } else if (position <= 0) { // [-1,0]
+                    // Use the default slide transition when moving to the left page
+                    view.setAlpha(1);
+                    view.setTranslationY(0);
+                    view.setScaleX(1);
+                    view.setScaleY(1);
+
+                } else if (position <= 1) { // (0,1]
+                    // Fade the page out.
+                    view.setAlpha(1 - position);
+
+                    // Counteract the default slide transition
+                    // view.setTranslationX(pageWidth * -position);
+
+                    // Scale the page down (between MIN_SCALE and 1)
+                    float scaleFactor = MIN_SCALE
+                            + (1 - MIN_SCALE) * (1 - Math.abs(position));
+                    view.setScaleX(scaleFactor);
+                    view.setScaleY(scaleFactor);
+
+                } else { // (1,+Infinity]
+                    // This page is way off-screen to the right.
+                    view.setAlpha(0);
+                }
+            }
+        });
+        // BannerApdater bannerApdater = new BannerApdater();
+        mViewPageBanner.setAdapter(new DummyAdapter(getChildFragmentManager()));
     }
 
     @Override
     public void renderBannerList(List<Banner> pBannerList) {
 
+    }
+
+    private class BannerApdater extends PagerAdapter {
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            ImageView banner = new ImageView(getContext());
+            banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            banner.setImageResource(R.drawable.example_banner);
+            return banner;
+        }
+
+        @Override
+        public int getCount() {
+            return 10;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view==((View)object);
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View)object);
+        }
+    }
+
+    public class DummyAdapter extends FragmentPagerAdapter {
+
+        public DummyAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a BannerFragment (defined as a static inner class below).
+            return BannerFragment.newInstance(position + 1);
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return 10;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return null;
+        }
+    }
+
+    /**
+     * A placeholder fragment containing a simple view.
+     */
+    public static class BannerFragment extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static BannerFragment newInstance(int sectionNumber) {
+            BannerFragment fragment = new BannerFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        public BannerFragment() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            ImageView banner = new ImageView(getContext());
+            banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            banner.setImageResource(R.drawable.example_banner);
+            return banner;
+        }
     }
 }

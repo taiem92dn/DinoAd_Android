@@ -33,6 +33,7 @@ public class LockScreenActivity extends BaseActivity implements HasComponent<App
         SlidrConfig config = new SlidrConfig.Builder()
                 .position(SlidrPosition.LEFT)
                 .scrimColor(Color.TRANSPARENT)
+                .edgeSize(0.25f)
                 .build();
 
         Slidr.attach(this, config);

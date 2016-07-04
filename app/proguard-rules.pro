@@ -15,7 +15,7 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
-
+-keepattributes EnclosingMethod
 #Butter Knife
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**
