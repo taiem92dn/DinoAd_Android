@@ -28,7 +28,7 @@ android {
     }
 
     compileSdkVersion 24
-    buildToolsVersion "23.0.3"
+    buildToolsVersion "24.0.0"
 
     defaultConfig {
         applicationId "vn.dinosys.dinoad"
@@ -49,6 +49,7 @@ android {
         }
         debug {
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug_key
         }
     }
@@ -71,16 +72,8 @@ android {
 
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
-        exclude 'META-INF/DEPENDENCIES.txt'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/notice.txt'
-        exclude 'META-INF/license.txt'
-        exclude 'META-INF/dependencies.txt'
-        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
     }
 }
 
@@ -101,12 +94,11 @@ ext {
     rxJavaLibVersion = '1.1.6'
     javaxAnnotationLibVersion = '1.0'
     // Google Play Services
-    playServiceLibVersion = '9.0.2'
+    playServiceLibVersion = '9.2.0'
     // Json
     gsonLibVersion = '2.7'
     // Image
     glideLibVersion = '3.7.0'
-
 }
 
 dependencies {

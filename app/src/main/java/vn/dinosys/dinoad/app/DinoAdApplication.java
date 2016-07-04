@@ -6,6 +6,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import vn.dinosys.dinoad.R;
 import vn.dinosys.dinoad.di.component.AppComponent;
 import vn.dinosys.dinoad.di.component.DaggerAppComponent;
+import vn.dinosys.dinoad.di.module.AppModule;
 
 /**
  * Created by htsi.
@@ -30,7 +31,7 @@ public class DinoAdApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        this.mAppComponent = DaggerAppComponent.builder().build();
+        this.mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
 
         //  Set default font to MyriadPro
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()

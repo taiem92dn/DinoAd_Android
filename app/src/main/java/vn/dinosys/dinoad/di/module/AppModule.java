@@ -13,6 +13,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import vn.dinosys.dinoad.data.net.repository.BannerRepository;
+import vn.dinosys.dinoad.data.net.repository.IBannerRepository;
+import vn.dinosys.dinoad.data.net.service.BannerService;
 
 /**
  * Created by htsi.
@@ -49,5 +52,17 @@ public class AppModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl("http://192.168.1.34:8080");
         return builder.build();
+    }
+
+    @Singleton
+    @Provides
+    IBannerRepository provideBannerRepository(BannerService pBannerService) {
+        return new BannerRepository(pBannerService);
+    }
+
+    @Singleton
+    @Provides
+    BannerService provideBannerService(@Named("REST_ADAPTER")Retrofit pRestAdapter) {
+        return pRestAdapter.create(BannerService.class);
     }
 }
