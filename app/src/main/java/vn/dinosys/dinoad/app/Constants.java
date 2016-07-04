@@ -8,4 +8,5 @@ package vn.dinosys.dinoad.app;
 public class Constants {
 
     public static final String APP_DEFAULT_FONT = "fonts/MYRIADPRO-REGULAR.OTF";
+    public static final String LOCK_SCREEN_ACTION = "android.intent.action.LOCK_SCREEN_ACTION";
 }

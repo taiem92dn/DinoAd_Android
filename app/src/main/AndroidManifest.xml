@@ -17,12 +17,30 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.lockscreen.LockScreenActivity">
+        <activity android:name=".ui.activity.lockscreen.LockScreenActivity"
+            android:theme="@style/LockScreenTheme"
+            android:launchMode="singleInstance">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.LOCK_SCREEN_ACTION"/>
                 <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.HOME"/>
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".app.DinoAdminReceiver"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/admin"/>
+
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".app.LockScreenService"/>
+
     </application>
 
 </manifest>
