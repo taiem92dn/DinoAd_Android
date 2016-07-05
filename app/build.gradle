@@ -116,7 +116,9 @@ dependencies {
     // Fonts Support
     compile "uk.co.chrisjenx:calligraphy:${calligraphyLibVersion}"
     // Google Maps
+
     // compile "com.google.android.gms:play-services-maps:${playServiceLibVersion}"
+
     // Dependence Injection
     compile "com.google.dagger:dagger-compiler:${daggerLibVersion}"
     compile "com.google.dagger:dagger:${daggerLibVersion}"
@@ -135,4 +137,5 @@ dependencies {
     compile 'com.r0adkll:slidableactivity:2.0.5'
     compile 'com.romainpiel.shimmer:library:1.4.0'
     compile 'com.github.castorflex.verticalviewpager:library:19.0.1'
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
 }

@@ -1,14 +1,16 @@
 package vn.dinosys.dinoad.ui.fragment.lockscreen;
 
+import android.app.Activity;
 import android.app.WallpaperManager;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerTextView;
 
@@ -32,6 +36,8 @@ import vn.dinosys.dinoad.R;
 import vn.dinosys.dinoad.data.net.model.Banner;
 import vn.dinosys.dinoad.di.component.AppComponent;
 import vn.dinosys.dinoad.presenter.lockscreen.LockScreenPresenter;
+import vn.dinosys.dinoad.ui.activity.MainActivity;
+import vn.dinosys.dinoad.ui.activity.lockscreen.YoutubePlayerActivity;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
 import vn.dinosys.dinoad.ui.view.ILockScreenView;
 
@@ -78,13 +84,15 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
         setupUI();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
     private void setupUI() {
-        initialize();
 
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(getContext());
         Drawable drawable = wallpaperManager.getDrawable();
-        //ImageView imgBackground = ((ImageView)getView().findViewById(R.id.imgBackground));
-        //imgBackground.setScaleType(ImageView.ScaleType.CENTER_CROP);
         mImgBackground.setImageDrawable(drawable);
 
         updateTextDateTime();
@@ -93,6 +101,8 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
 
         Shimmer shimmer = new Shimmer();
         shimmer.setDuration(2000).start(mTextSlideToUnlock);
+
+        initialize();
     }
 
     @Override
@@ -105,7 +115,6 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
     private void initialize() {
         this.getComponent(AppComponent.class).inject(this);
         mLockScreenPresenter.setView(this);
-        //mLockScreenPresenter.loadBanners();
     }
 
     private void updateTextDateTime() {
@@ -147,7 +156,7 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
                     view.setAlpha(1 - position);
 
                     // Counteract the default slide transition
-                    // view.setTranslationX(pageWidth * -position);
+                    //view.setTranslationY(pageWidth * -position);
 
                     // Scale the page down (between MIN_SCALE and 1)
                     float scaleFactor = MIN_SCALE
@@ -161,8 +170,7 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
                 }
             }
         });
-        // BannerApdater bannerApdater = new BannerApdater();
-        mViewPageBanner.setAdapter(new DummyAdapter(getChildFragmentManager()));
+        mViewPageBanner.setAdapter(new BannerAdapter(getChildFragmentManager()));
     }
 
     @Override
@@ -170,35 +178,10 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
 
     }
 
-    private class BannerApdater extends PagerAdapter {
 
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            ImageView banner = new ImageView(getContext());
-            banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            banner.setImageResource(R.drawable.example_banner);
-            return banner;
-        }
+    public class BannerAdapter extends FragmentPagerAdapter {
 
-        @Override
-        public int getCount() {
-            return 10;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view==((View)object);
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View)object);
-        }
-    }
-
-    public class DummyAdapter extends FragmentPagerAdapter {
-
-        public DummyAdapter(FragmentManager fm) {
+        public BannerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -230,6 +213,7 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        public static final String DEVELOPER_KEY = "AIzaSyAkcnHqlwdAJczlCDGs6zicr8P7Zbxr3Xs";
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -252,6 +236,9 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
             ImageView banner = new ImageView(getContext());
             banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
             banner.setImageResource(R.drawable.example_banner);
+            banner.setOnClickListener(pView -> {
+                startActivity(new Intent(getActivity(), YoutubePlayerActivity.class));
+            });
             return banner;
         }
     }

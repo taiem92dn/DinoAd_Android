@@ -30,7 +30,6 @@ public class MainActivity extends BaseActivity {
 
     public void goToLockScreen(View pView) {
         //startActivity(new Intent(this, LockScreenActivity.class));
-        //
         ComponentName componentName = new ComponentName(this, DinoAdminReceiver.class);
 
         Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);

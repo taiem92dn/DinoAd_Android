@@ -3,4 +3,6 @@
 
     <string name="time_format">%1$s %2$s</string>
     <string name="slide_unlock">&#160; Slide to unlock</string>
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+
 </resources>

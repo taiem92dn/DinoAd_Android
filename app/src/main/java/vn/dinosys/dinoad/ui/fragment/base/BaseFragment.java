@@ -2,6 +2,7 @@ package vn.dinosys.dinoad.ui.fragment.base;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 
 import butterknife.ButterKnife;
@@ -22,9 +23,16 @@ public class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupComponent();
+        Log.d("BaseFragment", "onViewCreated");
         ButterKnife.bind(this, view);
+        setupComponent();
         onScreenVisible();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
     }
 
     public String getTitle() {

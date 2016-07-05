@@ -34,13 +34,14 @@ public class LockScreenPresenter implements IBasePresenter<ILockScreenView> {
     @Override
     public void setView(ILockScreenView pILockScreenView) {
         mLockScreenView = pILockScreenView;
+        initialize();
     }
 
-    public void initialize () {
+    private void initialize () {
         loadBanners();
     }
 
-    public void loadBanners () {
+    private void loadBanners () {
 
         mBannerRepository.getAllBanners().enqueue(new Callback<List<Banner>>() {
             @Override

@@ -3,6 +3,7 @@ package vn.dinosys.dinoad.ui.activity.lockscreen;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrConfig;
@@ -26,6 +27,7 @@ public class LockScreenActivity extends BaseActivity implements HasComponent<App
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("LockScreenActivity", "onCreate");
 
         //SlidrPosition position = SlidrPosition.values()[Utils.getRandom().nextInt(numPositions)];
         //mPosition.setText(position.name());
@@ -47,5 +49,12 @@ public class LockScreenActivity extends BaseActivity implements HasComponent<App
     @Override
     public AppComponent getComponent() {
         return getApplicationComponent();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("LockScreenActivity", "onDestroy");
+
     }
 }
