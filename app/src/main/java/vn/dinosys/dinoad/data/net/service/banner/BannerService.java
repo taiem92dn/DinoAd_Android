@@ -1,4 +1,4 @@
-package vn.dinosys.dinoad.data.net.service;
+package vn.dinosys.dinoad.data.net.service.banner;
 
 import java.util.List;
 

@@ -29,9 +29,6 @@ public class LockScreenActivity extends BaseActivity implements HasComponent<App
         super.onCreate(savedInstanceState);
         Log.d("LockScreenActivity", "onCreate");
 
-        //SlidrPosition position = SlidrPosition.values()[Utils.getRandom().nextInt(numPositions)];
-        //mPosition.setText(position.name());
-
         SlidrConfig config = new SlidrConfig.Builder()
                 .position(SlidrPosition.LEFT)
                 .scrimColor(Color.TRANSPARENT)
@@ -49,12 +46,5 @@ public class LockScreenActivity extends BaseActivity implements HasComponent<App
     @Override
     public AppComponent getComponent() {
         return getApplicationComponent();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d("LockScreenActivity", "onDestroy");
-
     }
 }

@@ -1,6 +1,6 @@
 package vn.dinosys.dinoad.app;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import vn.dinosys.dinoad.R;
@@ -13,7 +13,7 @@ import vn.dinosys.dinoad.di.module.AppModule;
  * Since: 7/1/16 on 5:21 PM
  * Project: DinoAd
  */
-public class DinoAdApplication extends Application {
+public class DinoAdApplication extends MultiDexApplication {
 
     private static DinoAdApplication sInstance;
 

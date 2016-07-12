@@ -10,7 +10,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import vn.dinosys.dinoad.data.net.model.Banner;
-import vn.dinosys.dinoad.data.net.repository.IBannerRepository;
+import vn.dinosys.dinoad.data.net.repository.banner.IBannerRepository;
 import vn.dinosys.dinoad.presenter.base.IBasePresenter;
 import vn.dinosys.dinoad.ui.view.ILockScreenView;
 
@@ -47,6 +47,9 @@ public class LockScreenPresenter implements IBasePresenter<ILockScreenView> {
             @Override
             public void onResponse(Call<List<Banner>> call, Response<List<Banner>> response) {
                 Log.d(TAG, "onResponse");
+                List<Banner> bannerList = response.body();
+                if (response.body() != null)
+                    mLockScreenView.renderBannerList(bannerList);
             }
 
             @Override

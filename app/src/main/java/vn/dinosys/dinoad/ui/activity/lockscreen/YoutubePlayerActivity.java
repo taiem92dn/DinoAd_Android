@@ -1,5 +1,7 @@
 package vn.dinosys.dinoad.ui.activity.lockscreen;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,9 +22,16 @@ import vn.dinosys.dinoad.R;
 public class YoutubePlayerActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
     private static final int RECOVERY_DIALOG_REQUEST = 1;
-    public static final String DEVELOPER_KEY = "AIzaSyAkcnHqlwdAJczlCDGs6zicr8P7Zbxr3Xs";
 
-    private YouTubePlayer mYouTubePlayer;
+    private static final String VIDEO_ID_KEY = "video_id";
+
+    private String mVideoId;
+
+    public static final Intent createIntent(Context pContext, String pVideoId) {
+        Intent intent = new Intent(pContext, YoutubePlayerActivity.class);
+        intent.putExtra(VIDEO_ID_KEY, pVideoId);
+        return intent;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,16 +39,17 @@ public class YoutubePlayerActivity extends YouTubeBaseActivity implements YouTub
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_youtube_player);
 
+        mVideoId = getIntent().getStringExtra(VIDEO_ID_KEY);
+
         YouTubePlayerView youTubePlayerView = (YouTubePlayerView)findViewById(R.id.youtube_view);
-        youTubePlayerView.initialize(DEVELOPER_KEY, this);
+        youTubePlayerView.initialize(getString(R.string.youtube_api_key), this);
     }
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider pProvider, YouTubePlayer pYouTubePlayer, boolean pB) {
-        this.mYouTubePlayer = pYouTubePlayer;
-        this.mYouTubePlayer.addFullscreenControlFlag(YouTubePlayer.FULLSCREEN_FLAG_CONTROL_ORIENTATION);
+        pYouTubePlayer.addFullscreenControlFlag(YouTubePlayer.FULLSCREEN_FLAG_CONTROL_ORIENTATION);
         if (!pB) {
-            this.mYouTubePlayer.loadVideo("g3vprAJ2X-k");
+            pYouTubePlayer.loadVideo(mVideoId);
         }
     }
 

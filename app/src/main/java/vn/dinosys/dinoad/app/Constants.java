@@ -7,6 +7,12 @@ package vn.dinosys.dinoad.app;
  */
 public class Constants {
 
+    public static final String BASE_URL = "http://192.168.1.34:8080";
+    public static final String IMG_PREFIX = "/adserver/www/images/";
+    public static final String API_PREFIX = "adserver/www/delivery/api.php/";
+
     public static final String APP_DEFAULT_FONT = "fonts/MYRIADPRO-REGULAR.OTF";
     public static final String LOCK_SCREEN_ACTION = "android.intent.action.LOCK_SCREEN_ACTION";
+
+    public static final String APP_DATABASE_NAME = "dinoad.dat";
 }

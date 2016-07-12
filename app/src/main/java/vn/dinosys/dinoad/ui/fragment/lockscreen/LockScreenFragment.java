@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.WallpaperManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,9 +16,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.romainpiel.shimmer.Shimmer;
@@ -33,6 +36,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 import vn.dinosys.dinoad.R;
+import vn.dinosys.dinoad.app.Constants;
 import vn.dinosys.dinoad.data.net.model.Banner;
 import vn.dinosys.dinoad.di.component.AppComponent;
 import vn.dinosys.dinoad.presenter.lockscreen.LockScreenPresenter;
@@ -68,6 +72,8 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
     @BindView(R.id.viewPageBanner)
     VerticalViewPager mViewPageBanner;
 
+    private static List<Banner> mBannerList;
+
     public static LockScreenFragment newInstance() {
         return new LockScreenFragment();
     }
@@ -97,10 +103,46 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
 
         updateTextDateTime();
 
-        setupViewPageBanner();
-
         Shimmer shimmer = new Shimmer();
         shimmer.setDuration(2000).start(mTextSlideToUnlock);
+
+        mViewPageBanner.setPageTransformer(true, new ViewPager.PageTransformer() {
+
+            private static final float MIN_SCALE = 0.75f;
+
+            public void transformPage(View view, float position) {
+                //int pageWidth = view.getWidth();
+
+                if (position < -1) { // [-Infinity,-1)
+                    // This page is way off-screen to the left.
+                    view.setAlpha(0);
+
+                } else if (position <= 0) { // [-1,0]
+                    // Use the default slide transition when moving to the left page
+                    view.setAlpha(1);
+                    view.setTranslationY(0);
+                    view.setScaleX(1);
+                    view.setScaleY(1);
+
+                } else if (position <= 1) { // (0,1]
+                    // Fade the page out.
+                    view.setAlpha(1 - position);
+
+                    // Counteract the default slide transition
+                    //view.setTranslationY(pageWidth * -position);
+
+                    // Scale the page down (between MIN_SCALE and 1)
+                    float scaleFactor = MIN_SCALE
+                            + (1 - MIN_SCALE) * (1 - Math.abs(position));
+                    view.setScaleX(scaleFactor);
+                    view.setScaleY(scaleFactor);
+
+                } else { // (1,+Infinity]
+                    // This page is way off-screen to the right.
+                    view.setAlpha(0);
+                }
+            }
+        });
 
         initialize();
     }
@@ -133,49 +175,16 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
     }
 
     private void setupViewPageBanner() {
-        mViewPageBanner.setPageTransformer(true, new ViewPager.PageTransformer() {
-
-            private static final float MIN_SCALE = 0.75f;
-
-            public void transformPage(View view, float position) {
-                int pageWidth = view.getWidth();
-
-                if (position < -1) { // [-Infinity,-1)
-                    // This page is way off-screen to the left.
-                    view.setAlpha(0);
-
-                } else if (position <= 0) { // [-1,0]
-                    // Use the default slide transition when moving to the left page
-                    view.setAlpha(1);
-                    view.setTranslationY(0);
-                    view.setScaleX(1);
-                    view.setScaleY(1);
-
-                } else if (position <= 1) { // (0,1]
-                    // Fade the page out.
-                    view.setAlpha(1 - position);
-
-                    // Counteract the default slide transition
-                    //view.setTranslationY(pageWidth * -position);
-
-                    // Scale the page down (between MIN_SCALE and 1)
-                    float scaleFactor = MIN_SCALE
-                            + (1 - MIN_SCALE) * (1 - Math.abs(position));
-                    view.setScaleX(scaleFactor);
-                    view.setScaleY(scaleFactor);
-
-                } else { // (1,+Infinity]
-                    // This page is way off-screen to the right.
-                    view.setAlpha(0);
-                }
-            }
-        });
         mViewPageBanner.setAdapter(new BannerAdapter(getChildFragmentManager()));
     }
 
     @Override
     public void renderBannerList(List<Banner> pBannerList) {
-
+        for (Banner banner: pBannerList) {
+            Log.d(TAG, banner.toString());
+        }
+        this.mBannerList = pBannerList;
+        setupViewPageBanner();
     }
 
 
@@ -189,13 +198,13 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a BannerFragment (defined as a static inner class below).
-            return BannerFragment.newInstance(position + 1);
+            return BannerFragment.newInstance(position);
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 10;
+            // Show 10 total pages.
+            return mBannerList.size();
         }
 
         @Override
@@ -213,7 +222,6 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
-        public static final String DEVELOPER_KEY = "AIzaSyAkcnHqlwdAJczlCDGs6zicr8P7Zbxr3Xs";
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -233,13 +241,43 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            ImageView banner = new ImageView(getContext());
-            banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            banner.setImageResource(R.drawable.example_banner);
-            banner.setOnClickListener(pView -> {
-                startActivity(new Intent(getActivity(), YoutubePlayerActivity.class));
-            });
-            return banner;
+
+            Banner banner = mBannerList.get(getArguments().getInt(ARG_SECTION_NUMBER));
+
+            if (!banner.getStorageType().equals("html")) {
+
+                ImageView bannerView = new ImageView(getContext());
+                bannerView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+                int equalIndex = banner.getDestUrl().indexOf("=") + 1;
+                String videoId = banner.getDestUrl().substring(equalIndex);
+                Log.d(TAG, videoId);
+
+                /*if (banner.getContentType().equals("gif")) {
+                    Glide.with(getContext()).load(Constants.BASE_URL + Constants.IMG_PREFIX + banner.getImgFileName()).asGif().into(bannerView);
+                } else {*/
+                    Glide.with(getContext()).load(Constants.BASE_URL + Constants.IMG_PREFIX + banner.getImgFileName()).into(bannerView);
+                //}
+
+                bannerView.setOnClickListener(pView -> startActivity(YoutubePlayerActivity.createIntent(getContext(), videoId)));
+
+                return bannerView;
+
+            } else {
+
+                WebView bannerView = new WebView(getContext());
+                bannerView.getSettings().getJavaScriptEnabled();
+
+                Log.d(TAG, banner.getHtmlTemplate());
+                bannerView.loadData("<!DOCTYPE html>\n" +
+                        "<html>\n" +
+                        "<head>\n" +
+                        "\t<title></title>\n" +
+                        "</head>\n" +
+                        "<body><A>" + banner.getHtmlTemplate() + "</body>\n" +
+                        "</html>", "text/html", "utf-8");
+                return bannerView;
+            }
         }
     }
 }

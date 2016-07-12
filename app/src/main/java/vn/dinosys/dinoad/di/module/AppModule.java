@@ -2,6 +2,7 @@ package vn.dinosys.dinoad.di.module;
 
 import android.app.Application;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import javax.inject.Named;
@@ -13,9 +14,13 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import vn.dinosys.dinoad.data.net.repository.BannerRepository;
-import vn.dinosys.dinoad.data.net.repository.IBannerRepository;
-import vn.dinosys.dinoad.data.net.service.BannerService;
+import vn.dinosys.dinoad.app.Constants;
+import vn.dinosys.dinoad.data.database.migration.DbUpgradeHelper;
+import vn.dinosys.dinoad.data.database.table.dao.DaoMaster;
+import vn.dinosys.dinoad.data.database.table.dao.DaoSession;
+import vn.dinosys.dinoad.data.net.repository.banner.BannerRepository;
+import vn.dinosys.dinoad.data.net.repository.banner.IBannerRepository;
+import vn.dinosys.dinoad.data.net.service.banner.BannerService;
 
 /**
  * Created by htsi.
@@ -27,7 +32,6 @@ public class AppModule {
 
     private final Application mApplication;
 
-
     public AppModule(Application pApplication) {
         mApplication = pApplication;
     }
@@ -35,6 +39,15 @@ public class AppModule {
     @Provides
     @Singleton
     Context provideApplicationContext() { return mApplication;}
+
+    @Provides
+    @Singleton
+    DaoSession provideDaoSession(Context pContext) {
+        DaoMaster.OpenHelper helper = new DbUpgradeHelper(pContext, Constants.APP_DATABASE_NAME, null);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        DaoMaster daoMaster = new DaoMaster(db);
+        return daoMaster.newSession();
+    }
 
     @Provides
     @Singleton

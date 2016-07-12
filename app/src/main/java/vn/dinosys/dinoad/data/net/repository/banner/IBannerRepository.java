@@ -1,4 +1,4 @@
-package vn.dinosys.dinoad.data.net.repository;
+package vn.dinosys.dinoad.data.net.repository.banner;
 
 import java.util.List;
 

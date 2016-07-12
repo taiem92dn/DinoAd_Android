@@ -5,4 +5,19 @@
     <string name="slide_unlock">&#160; Slide to unlock</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
 
+
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="get_account">Don\'t have an account?</string>
+    <string name="have_account">I have an account!</string>
+
+    <string name="retype_password">Retype password</string>
+    <string name="btn_register">Register</string>
+    <string name="txt_via">Or Via</string>
+
+
 </resources>

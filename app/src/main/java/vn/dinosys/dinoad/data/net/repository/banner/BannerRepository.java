@@ -1,10 +1,10 @@
-package vn.dinosys.dinoad.data.net.repository;
+package vn.dinosys.dinoad.data.net.repository.banner;
 
 import java.util.List;
 
 import retrofit2.Call;
 import vn.dinosys.dinoad.data.net.model.Banner;
-import vn.dinosys.dinoad.data.net.service.BannerService;
+import vn.dinosys.dinoad.data.net.service.banner.BannerService;
 
 /**
  * Created by htsi.
