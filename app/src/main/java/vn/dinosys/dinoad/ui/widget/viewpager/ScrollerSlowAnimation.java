@@ -1,6 +1,5 @@
 package vn.dinosys.dinoad.ui.widget.viewpager;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
@@ -12,17 +11,8 @@ import android.widget.Scroller;
  */
 public class ScrollerSlowAnimation extends Scroller {
 
-    public ScrollerSlowAnimation(Context context) {
-        super(context);
-    }
-
     public ScrollerSlowAnimation(Context context, Interpolator interpolator) {
         super(context, interpolator);
-    }
-
-    @SuppressLint("NewApi")
-    public ScrollerSlowAnimation(Context context, Interpolator interpolator, boolean flywheel) {
-        super(context, interpolator, flywheel);
     }
 
     @Override

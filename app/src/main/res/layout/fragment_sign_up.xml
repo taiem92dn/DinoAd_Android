@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tilUsername">
 
+            <requestFocus/>
             <EditText
                 android:id="@+id/editUsername"
                 android:layout_width="match_parent"
@@ -42,8 +43,8 @@
                 android:hint="@string/password_hint"
                 android:singleLine="true"
                 android:inputType="textPassword"
-                android:imeOptions="actionDone"
-                android:nextFocusDown="@+id/btnSignIn"/>
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/editRetype"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -62,7 +63,7 @@
                 android:singleLine="true"
                 android:inputType="textPassword"
                 android:imeOptions="actionDone"
-                android:nextFocusDown="@+id/btnSignIn"/>
+                android:nextFocusDown="@+id/btnRegister"/>
 
         </android.support.design.widget.TextInputLayout>
 

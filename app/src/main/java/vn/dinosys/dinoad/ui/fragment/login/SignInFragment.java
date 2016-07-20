@@ -2,16 +2,15 @@ package vn.dinosys.dinoad.ui.fragment.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.dinosys.dinoad.R;
+import vn.dinosys.dinoad.ui.activity.home.HomeActivity;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
 
 /**
@@ -39,10 +38,14 @@ public class SignInFragment extends BaseFragment {
     private void setupUI() {
     }
 
+    @OnClick(R.id.btnSignIn)
+    public void onSignInClicked(View pView) {
+        startActivity(HomeActivity.createIntent(getContext()));
+    }
 
     @OnClick(R.id.btnSignUp)
     public void onSignUpClicked(View pView) {
         LoginContainerFragment fragment = (LoginContainerFragment) getParentFragment();
-        fragment.tooglePage();
+        fragment.togglePage();
     }
 }

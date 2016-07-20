@@ -1,17 +1,12 @@
 package vn.dinosys.dinoad.ui.fragment.lockscreen;
 
-import android.app.Activity;
 import android.app.WallpaperManager;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.youtube.player.YouTubeBaseActivity;
-import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerTextView;
 
@@ -40,10 +33,10 @@ import vn.dinosys.dinoad.app.Constants;
 import vn.dinosys.dinoad.data.net.model.Banner;
 import vn.dinosys.dinoad.di.component.AppComponent;
 import vn.dinosys.dinoad.presenter.lockscreen.LockScreenPresenter;
-import vn.dinosys.dinoad.ui.activity.MainActivity;
 import vn.dinosys.dinoad.ui.activity.lockscreen.YoutubePlayerActivity;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
 import vn.dinosys.dinoad.ui.view.ILockScreenView;
+import vn.dinosys.dinoad.ui.widget.viewpager.ViewPageTransform;
 
 /**
  * Created by htsi.
@@ -106,43 +99,7 @@ public class LockScreenFragment extends BaseFragment implements ILockScreenView 
         Shimmer shimmer = new Shimmer();
         shimmer.setDuration(2000).start(mTextSlideToUnlock);
 
-        mViewPageBanner.setPageTransformer(true, new ViewPager.PageTransformer() {
-
-            private static final float MIN_SCALE = 0.75f;
-
-            public void transformPage(View view, float position) {
-                //int pageWidth = view.getWidth();
-
-                if (position < -1) { // [-Infinity,-1)
-                    // This page is way off-screen to the left.
-                    view.setAlpha(0);
-
-                } else if (position <= 0) { // [-1,0]
-                    // Use the default slide transition when moving to the left page
-                    view.setAlpha(1);
-                    view.setTranslationY(0);
-                    view.setScaleX(1);
-                    view.setScaleY(1);
-
-                } else if (position <= 1) { // (0,1]
-                    // Fade the page out.
-                    view.setAlpha(1 - position);
-
-                    // Counteract the default slide transition
-                    //view.setTranslationY(pageWidth * -position);
-
-                    // Scale the page down (between MIN_SCALE and 1)
-                    float scaleFactor = MIN_SCALE
-                            + (1 - MIN_SCALE) * (1 - Math.abs(position));
-                    view.setScaleX(scaleFactor);
-                    view.setScaleY(scaleFactor);
-
-                } else { // (1,+Infinity]
-                    // This page is way off-screen to the right.
-                    view.setAlpha(0);
-                }
-            }
-        });
+        mViewPageBanner.setPageTransformer(true, new ViewPageTransform());
 
         initialize();
     }

@@ -75,7 +75,7 @@ public class SignUpFragment extends BaseFragment {
     @OnClick(R.id.btnSignIn)
     public void onSignUpClicked(View pView) {
         LoginContainerFragment fragment = (LoginContainerFragment) getParentFragment();
-        fragment.tooglePage();
+        fragment.togglePage();
     }
 
     @OnClick(R.id.btnLoginFaceBook)
