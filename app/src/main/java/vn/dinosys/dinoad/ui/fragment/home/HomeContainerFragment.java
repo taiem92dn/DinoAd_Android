@@ -16,6 +16,7 @@ import com.roughike.bottombar.OnTabClickListener;
 import butterknife.BindView;
 import vn.dinosys.dinoad.R;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
+import vn.dinosys.dinoad.ui.fragment.gift.GiftFragment;
 
 /**
  * Created by htsi.

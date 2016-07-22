@@ -5,10 +5,15 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import vn.dinosys.dinoad.R;
+import vn.dinosys.dinoad.data.net.model.Banner;
+import vn.dinosys.dinoad.ui.adapter.PromotionAdapter;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
 
 /**
@@ -26,13 +31,16 @@ public class PromotionFragment extends BaseFragment {
         return fragment;
     }
 
-    @BindView(R.id.textTitle)
-    TextView mTextTitle;
+
+    @BindView(R.id.list)
+    ListView mListView;
+
+    private PromotionAdapter mAdapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_promotion, container, false);
     }
 
     @Override
@@ -40,6 +48,19 @@ public class PromotionFragment extends BaseFragment {
         super.onScreenVisible();
 
         String title = getArguments().getString("TITLE");
-        mTextTitle.setText(title);
+
+        setupUI();
+    }
+
+    private void setupUI() {
+        List<Banner> banners = new ArrayList<>();
+        banners.add(new Banner());
+        banners.add(new Banner());
+        banners.add(new Banner());
+        banners.add(new Banner());
+        banners.add(new Banner());
+        mAdapter = new PromotionAdapter(banners);
+        mListView.setAdapter(mAdapter);
+
     }
 }

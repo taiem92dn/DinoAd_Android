@@ -26,4 +26,13 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="font_SEMIBOLD">
+        <item name="fontPath">fonts/MYRIADPRO-SEMIBOLD.OTF</item>
+    </style>
+    <style name="font_SEMIBOLDCOND">
+        <item name="fontPath">fonts/MYRIADPRO-SEMIBOLDCOND_1.OTF</item>
+    </style>
+    <style name="font_BOLDSEMICN">
+        <item name="fontPath">fonts/MYRIADPRO-BOLDSEMICN_0.OTF</item>
+    </style>
 </resources>
