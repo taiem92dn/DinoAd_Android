@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.preference.PreferenceCategory
-        android:title="category 1">
+    <android.support.v7.preference.PreferenceCategory>
         <android.support.v7.preference.SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="active_lock_screen"
@@ -15,12 +14,14 @@
     </android.support.v7.preference.PreferenceCategory>
 
     <android.support.v7.preference.PreferenceCategory
+        android:layout="@layout/divider_preference"
         android:title="category 2">
         <android.support.v7.preference.Preference
             android:title="@string/my_info"/>
     </android.support.v7.preference.PreferenceCategory>
 
     <android.support.v7.preference.PreferenceCategory
+        android:layout="@layout/divider_preference"
         android:title="category 3">
         <android.support.v7.preference.Preference
             android:title="@string/notice"/>
@@ -31,6 +32,7 @@
     </android.support.v7.preference.PreferenceCategory>
 
     <android.support.v7.preference.PreferenceCategory
+        android:layout="@layout/divider_preference"
         android:title="category 4">
         <android.support.v7.preference.Preference
             android:title="@string/customer_service"/>
@@ -43,6 +45,7 @@
     </android.support.v7.preference.PreferenceCategory>
 
     <android.support.v7.preference.PreferenceCategory
+        android:layout="@layout/divider_preference"
         android:title="category 5">
         <android.support.v7.preference.Preference
             android:title="@string/delete_account"/>

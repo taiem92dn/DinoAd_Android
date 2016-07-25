@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.Auth;
@@ -48,6 +50,8 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
 
     private GoogleApiClient mGoogleApiClient;
 
+    private CallbackManager mCallbackManager;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,20 +67,22 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
     protected void onScreenVisible() {
         super.onScreenVisible();
 
-        LoginManager.getInstance().registerCallback(CallbackManager.Factory.create(), new FacebookCallback<LoginResult>() {
+        mCallbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult pLoginResult) {
                 Log.i(TAG,"onSuccess");
-            }
+                getUserInfoFromFacebook(pLoginResult.getAccessToken());
 
+            }
             @Override
             public void onCancel() {
-
+                Log.i(TAG,"onCancel");
             }
 
             @Override
             public void onError(FacebookException error) {
-
+                Log.i(TAG,"onError: " + error.getMessage());
             }
         });
 
@@ -109,6 +115,12 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+    }
 
     private boolean isInputValidate() {
         String username = mEditUsername.getText() + "";
@@ -138,13 +150,32 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
 
     @OnClick(R.id.btnLoginFaceBook)
     public void onLoginFacebook(View pView) {
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "user_friends"));
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email", "user_birthday", "user_friends"));
     }
 
     @OnClick(R.id.btnLoginGPlus)
     public void onLoginGPlus(View pView) {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, 100);
+    }
+
+    public void getUserInfoFromFacebook(AccessToken accessToken) {
+        GraphRequest request = GraphRequest.newMeRequest(
+                accessToken,
+                (object, response) -> {
+//                    try {
+//                        String email = object.getString("email");
+//                        String birthday = object.getString("birthday");
+                        Log.d(TAG, object.toString());
+//                    } catch (JSONException pE) {
+//                        pE.printStackTrace();
+//                    }
+                }
+        );
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,email,gender,birthday");
+        request.setParameters(parameters);
+        request.executeAsync();
     }
 
     @Override

@@ -1,10 +1,13 @@
 package vn.dinosys.dinoad.ui.fragment.home;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.widget.AppCompatSpinner;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
 
 import vn.dinosys.dinoad.R;
 
@@ -13,7 +16,7 @@ import vn.dinosys.dinoad.R;
  * Since: 7/18/16 on 10:07 AM
  * Project: DinoAd
  */
-public class SettingFragment extends PreferenceFragmentCompat {
+public class SettingFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener{
 
     public static SettingFragment newInstance(String title) {
         SettingFragment fragment = new SettingFragment();
@@ -22,85 +25,56 @@ public class SettingFragment extends PreferenceFragmentCompat {
         fragment.setArguments(bundle);
         return fragment;
     }
-    /**
-     * A preference value change listener that updates the preference's summary
-     * to reflect its new value.
-     */
-    private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
-        @Override
-        public boolean onPreferenceChange(Preference preference, Object value) {
-            String stringValue = value.toString();
 
-            if (preference instanceof ListPreference) {
-                // For list preferences, look up the correct display value in
-                // the preference's 'entries' list.
-                ListPreference listPreference = (ListPreference) preference;
-                int index = listPreference.findIndexOfValue(stringValue);
+    public static final String KEY_ACTIVE_LOCK_SCREEN = "active_lock_screen";
+    private AlertDialog mInactiveLockscreenDialog;
 
-                // Set the summary to reflect the new value.
-                preference.setSummary(
-                        index >= 0
-                                ? listPreference.getEntries()[index]
-                                : null);
-
-//            } else if (preference instanceof RingtonePreference) {
-//                // For ringtone preferences, look up the correct display value
-//                // using RingtoneManager.
-//                if (TextUtils.isEmpty(stringValue)) {
-//                    // Empty values correspond to 'silent' (no ringtone).
-//                    preference.setSummary(R.string.pref_ringtone_silent);
-//
-//                } else {
-//                    Ringtone ringtone = RingtoneManager.getRingtone(
-//                            preference.getContext(), Uri.parse(stringValue));
-//
-//                    if (ringtone == null) {
-//                        // Clear the summary if there was a lookup error.
-//                        preference.setSummary(null);
-//                    } else {
-//                        // Set the summary to reflect the new ringtone display
-//                        // name.
-//                        String name = ringtone.getTitle(preference.getContext());
-//                        preference.setSummary(name);
-//                    }
-//                }
-
-            } else {
-                // For all other preferences, set the summary to the value's
-                // simple string representation.
-                preference.setSummary(stringValue);
-            }
-            return true;
-        }
-    };
-
-
-    /**
-     * Binds a preference's summary to its value. More specifically, when the
-     * preference's value is changed, its summary (line of text below the
-     * preference title) is updated to reflect the value. The summary is also
-     * immediately updated upon calling this method. The exact display format is
-     * dependent on the type of preference.
-     *
-     * @see #sBindPreferenceSummaryToValueListener
-     */
-    private static void bindPreferenceSummaryToValue(Preference preference) {
-        // Set the listener to watch for value changes.
-        preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
-
-        // Trigger the listener immediately with the preference's
-        // current value.
-        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
-    }
 
     @Override
     public void onCreatePreferences(Bundle pBundle, String pS) {
         addPreferencesFromResource(R.xml.pref_setting);
 
+        mInactiveLockscreenDialog = createInactiveLockScreenDialog();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences pSharedPreferences, String key) {
+
+        if (key.equals(KEY_ACTIVE_LOCK_SCREEN)) {
+//            Toast.makeText(getContext(), "active lock screen " + pSharedPreferences.getBoolean(key, false), Toast.LENGTH_SHORT)
+//                    .show();
+            if (!pSharedPreferences.getBoolean(key, false)) {
+                mInactiveLockscreenDialog.show();
+            }
+        }
+    }
+
+    public AlertDialog createInactiveLockScreenDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.spinner, null);
+        AppCompatSpinner spinner = (AppCompatSpinner) view.findViewById(R.id.spinner);
+        ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item
+                                , getResources().getStringArray(R.array.inactive_lock_screen));
+        spinner.setAdapter(arrayAdapter);
+        builder.setView(view);
+        builder.setTitle(R.string.inactive_lock_screen_question);
+        builder.setPositiveButton(android.R.string.ok, (pDialogInterface, pI) -> {
+
+        });
+        builder.setNegativeButton(android.R.string.cancel, null);
+
+        return builder.create();
+    }
 }

@@ -47,6 +47,15 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="delete_account">Delete Account</string>
 
+    <string name="inactive_lock_screen_question">Inactive lockscreen?</string>
+    <string-array name="inactive_lock_screen">
+        <item>Inactive for 2 hours</item>
+        <item>Inactive for 4 hours</item>
+        <item>Inactive for 8 hours</item>
+        <item>Inactive for a day</item>
+        <item>I will turn on later</item>
+    </string-array>
+
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
