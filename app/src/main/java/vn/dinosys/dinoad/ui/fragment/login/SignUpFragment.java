@@ -18,13 +18,20 @@ import com.facebook.GraphRequest;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.json.JSONException;
 
 import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.dinosys.dinoad.R;
+import vn.dinosys.dinoad.app.Constants;
+import vn.dinosys.dinoad.ui.activity.home.HomeActivity;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
 import vn.dinosys.dinoad.ui.view.ISignUpView;
 import vn.dinosys.dinoad.util.Util;
@@ -83,14 +90,21 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
             @Override
             public void onError(FacebookException error) {
                 Log.i(TAG,"onError: " + error.getMessage());
+                showError(error.getMessage());
             }
         });
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(getContext())
                 .enableAutoManage(getActivity(), pConnectionResult -> {
-
+                    Log.d(TAG, pConnectionResult.getErrorMessage());
+                    showError(pConnectionResult.getErrorMessage());
                 })
-                .addApi(Auth.GOOGLE_SIGN_IN_API).build();
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
     }
 
     @OnClick(R.id.btnSignIn)
@@ -120,6 +134,12 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
         super.onActivityResult(requestCode, resultCode, data);
 
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == Constants.RC_SIGN_IN_GOOGLE) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
     }
 
     private boolean isInputValidate() {
@@ -156,26 +176,51 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
     @OnClick(R.id.btnLoginGPlus)
     public void onLoginGPlus(View pView) {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, 100);
+        startActivityForResult(signInIntent, Constants.RC_SIGN_IN_GOOGLE);
+    }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+            if (acct != null) {
+                Log.d(TAG, acct.getDisplayName() + " " + acct.getEmail() + " " + acct.getId() + " " + acct);
+                showSignUpSocialSuccess();
+            }
+            else {
+                showError("Couldn't get info from google");
+            }
+
+        } else {
+            // Signed out, show unauthenticated UI.
+            showError("Sign in google false");
+        }
     }
 
     public void getUserInfoFromFacebook(AccessToken accessToken) {
         GraphRequest request = GraphRequest.newMeRequest(
                 accessToken,
                 (object, response) -> {
-//                    try {
-//                        String email = object.getString("email");
-//                        String birthday = object.getString("birthday");
-                        Log.d(TAG, object.toString());
-//                    } catch (JSONException pE) {
-//                        pE.printStackTrace();
-//                    }
+                    try {
+                        String email = object.getString("email");
+                        String birthday = object.getString("birthday");
+                        Log.d(TAG, email + " " + birthday);
+                        showSignUpSocialSuccess();
+                    } catch (JSONException pE) {
+                        pE.printStackTrace();
+                        showError("Couldn't get info from google");
+                    }
                 }
         );
         Bundle parameters = new Bundle();
         parameters.putString("fields", "id,name,email,gender,birthday");
         request.setParameters(parameters);
         request.executeAsync();
+    }
+
+    public void showSignUpSocialSuccess() {
+        startActivity(HomeActivity.createIntent(getContext()));
     }
 
     @Override
