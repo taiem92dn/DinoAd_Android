@@ -27,10 +27,14 @@ import org.json.JSONException;
 
 import java.util.Arrays;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.dinosys.dinoad.R;
 import vn.dinosys.dinoad.app.Constants;
+import vn.dinosys.dinoad.app.Runtime;
+import vn.dinosys.dinoad.di.component.AppComponent;
 import vn.dinosys.dinoad.ui.activity.home.HomeActivity;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
 import vn.dinosys.dinoad.ui.view.ISignUpView;
@@ -54,6 +58,9 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
 
     @BindView(R.id.editRetype)
     EditText mEditRetype;
+
+    @Inject
+    Runtime mRuntime;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -96,8 +103,10 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.server_client_id))
                 .requestEmail()
                 .build();
+        Log.d(TAG, getString(R.string.server_client_id));
 
         mGoogleApiClient = new GoogleApiClient.Builder(getContext())
                 .enableAutoManage(getActivity(), pConnectionResult -> {
@@ -105,6 +114,12 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
                     showError(pConnectionResult.getErrorMessage());
                 })
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+
+        initialize();
+    }
+
+    private void initialize() {
+        this.getComponent(AppComponent.class).inject(this);
     }
 
     @OnClick(R.id.btnSignIn)
@@ -185,7 +200,8 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             if (acct != null) {
-                Log.d(TAG, acct.getDisplayName() + " " + acct.getEmail() + " " + acct.getId() + " " + acct);
+//                Log.d(TAG, acct.getDisplayName() + " " + acct.getEmail() + " " + acct.getId() + " " + acct);
+                mRuntime.saveUser(acct.getEmail(), acct.getServerAuthCode(), Constants.LoginType.GOOGLE.ordinal());
                 showSignUpSocialSuccess();
             }
             else {
@@ -203,9 +219,10 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
                 accessToken,
                 (object, response) -> {
                     try {
+                        Log.d(TAG, object.toString());
                         String email = object.getString("email");
-                        String birthday = object.getString("birthday");
-                        Log.d(TAG, email + " " + birthday);
+//                        String birthday = object.getString("birthday");
+                        mRuntime.saveUser(email, accessToken.getToken(), Constants.LoginType.FACEBOOK.ordinal());
                         showSignUpSocialSuccess();
                     } catch (JSONException pE) {
                         pE.printStackTrace();
@@ -220,6 +237,7 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
     }
 
     public void showSignUpSocialSuccess() {
+        getActivity().finish();
         startActivity(HomeActivity.createIntent(getContext()));
     }
 
@@ -237,4 +255,5 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
     public void showError(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
+
 }

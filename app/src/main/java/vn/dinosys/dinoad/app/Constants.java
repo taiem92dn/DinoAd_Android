@@ -17,4 +17,8 @@ public class Constants {
     public static final String APP_DATABASE_NAME = "dinoad.dat";
 
     public static final int RC_SIGN_IN_GOOGLE = 100;
+
+    public enum LoginType {
+        FACEBOOK, GOOGLE, EMAIL
+    }
 }
