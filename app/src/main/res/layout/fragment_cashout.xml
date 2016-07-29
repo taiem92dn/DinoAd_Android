@@ -7,6 +7,7 @@
     android:padding="@dimen/default_margin_normal">
 
     <FrameLayout
+        android:id="@+id/flPrepaidCard"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="#0091EA">
@@ -21,6 +22,7 @@
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/flGameCard"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="@dimen/default_margin_normal"

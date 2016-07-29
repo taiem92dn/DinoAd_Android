@@ -119,7 +119,8 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
     @Override
     public boolean onPreferenceClick(Preference pPreference) {
         Log.d(TAG, pPreference.getKey() + " click");
-        if (pPreference.getKey().equals(KEY_DELETE_ACCOUNT)) {
+        if ( pPreference.getKey() != null &&
+                pPreference.getKey().equals(KEY_DELETE_ACCOUNT)) {
             DialogHelper.createConfirmDialog(getContext(), "Confirm", "Do you want to log out?"
                     , this::signOut)
             .show();

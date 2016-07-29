@@ -42,6 +42,7 @@ public class HomeContainerFragment extends BaseFragment {
 
     private void setupUI() {
         final BottomBar bottomBar = BottomBar.attach(getActivity(), null);
+        bottomBar.noTopOffset();
         bottomBar.setItems(R.menu.bottom_bar_menu);
         bottomBar.setOnTabClickListener(new OnTabClickListener() {
             @Override

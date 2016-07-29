@@ -106,7 +106,6 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
 //                .requestIdToken(getString(R.string.server_client_id))
                 .requestEmail()
                 .build();
-        Log.d(TAG, getString(R.string.server_client_id));
 
         mGoogleApiClient = new GoogleApiClient.Builder(getContext())
                 .enableAutoManage(getActivity(), pConnectionResult -> {

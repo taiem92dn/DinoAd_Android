@@ -21,4 +21,8 @@ public class Constants {
     public enum LoginType {
         FACEBOOK, GOOGLE, EMAIL
     }
+
+    public enum GiftCardType {
+        Prepaid, Game
+    }
 }

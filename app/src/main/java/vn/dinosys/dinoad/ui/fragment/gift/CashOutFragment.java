@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.OnClick;
 import vn.dinosys.dinoad.R;
+import vn.dinosys.dinoad.app.Constants;
+import vn.dinosys.dinoad.ui.activity.gift.GiftDetailActivity;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
 
 /**
@@ -42,5 +45,15 @@ public class CashOutFragment extends BaseFragment {
 
     private void setupUI() {
 
+    }
+
+    @OnClick(R.id.flPrepaidCard)
+    public void onClickPrepaidCard(View pView) {
+        GiftDetailActivity.show(getActivity(), Constants.GiftCardType.Prepaid);
+    }
+
+    @OnClick(R.id.flGameCard)
+    public void onClickGameCard(View pView) {
+        GiftDetailActivity.show(getActivity(), Constants.GiftCardType.Game);
     }
 }
