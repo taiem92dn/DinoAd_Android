@@ -11,6 +11,20 @@ public class PointDetail {
 
     private int mPrice;
 
+    private Type mType;
+
+    public PointDetail(String pTitle, int pPrice) {
+        mTitle = pTitle;
+        mPrice = pPrice;
+        mType = Type.NORMAL;
+    }
+
+    public PointDetail(String pTitle, int pPrice, Type pType) {
+        mTitle = pTitle;
+        mPrice = pPrice;
+        mType = pType;
+    }
+
     public String getTitle() {
         return mTitle;
     }
@@ -25,5 +39,17 @@ public class PointDetail {
 
     public void setPrice(int pPrice) {
         mPrice = pPrice;
+    }
+
+    public Type getType() {
+        return mType;
+    }
+
+    public void setType(Type pType) {
+        mType = pType;
+    }
+
+    public enum Type {
+        HEADER, NORMAL
     }
 }

@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/default_margin_normal"
     android:paddingTop="@dimen/default_margin_small"
     android:paddingBottom="@dimen/default_margin_small"
-    android:background="#EEEEEE">
+    android:background="#E0E0E0">
     <TextView
         android:id="@+id/textPointDetailTitle"
         android:layout_width="wrap_content"

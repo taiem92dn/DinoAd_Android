@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="vn.dinosys.dinoad.ui.activity.PointDetailActivity">
 
     <include layout="@layout/toolbar"/>
@@ -11,5 +12,8 @@
     <ExpandableListView
         android:id="@+id/elvPointDetail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:groupIndicator="@null"
+        android:childIndicator="@null"
+        android:childDivider="@color/bgChildColor"/>
 </LinearLayout>

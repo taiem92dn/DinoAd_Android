@@ -13,6 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_large"
             android:text="@string/balance"/>
         <TextView
             android:id="@+id/textTotalPoint"
@@ -20,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_margin_small"
             android:layout_marginRight="3dp"
-            android:textSize="@dimen/font_size_xlarge"
+            android:textSize="32sp"
             android:textColor="@color/colorPrimary"
             android:text="11,395"/>
         <TextView

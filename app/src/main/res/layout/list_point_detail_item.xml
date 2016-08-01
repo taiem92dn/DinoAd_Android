@@ -15,13 +15,26 @@
         android:textSize="@dimen/font_size_large"
         android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/textPointDetailPrice"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/font_size_large"
-        android:text="7010 đ"/>
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/textPointDetailPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_size_large"
+            android:text="7010 đ"/>
+
+        <ImageView
+            android:id="@+id/ivGroupIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/ic_arrow_drop_down"/>
+    </LinearLayout>
+
 </RelativeLayout>

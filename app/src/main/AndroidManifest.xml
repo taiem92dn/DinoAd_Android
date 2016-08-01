@@ -66,8 +66,8 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <activity android:name=".ui.activity.PointDetailActivity">
-        </activity>
+        <activity android:name=".ui.activity.PointDetailActivity"
+                  android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>
