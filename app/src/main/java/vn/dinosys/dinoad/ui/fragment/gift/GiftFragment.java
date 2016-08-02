@@ -17,7 +17,6 @@ import java.util.List;
 import butterknife.BindView;
 import vn.dinosys.dinoad.R;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
-import vn.dinosys.dinoad.ui.fragment.home.HomeFragment;
 
 /**
  * Created by htsi.
@@ -25,6 +24,8 @@ import vn.dinosys.dinoad.ui.fragment.home.HomeFragment;
  * Project: DinoAd
  */
 public class GiftFragment extends BaseFragment {
+
+    public static final String TAG = GiftFragment.class.getSimpleName();
 
     public static GiftFragment newInstance(String title) {
         GiftFragment fragment = new GiftFragment();
@@ -67,6 +68,9 @@ public class GiftFragment extends BaseFragment {
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
+    public void setCurrentTab(int position) {
+        mViewPager.setCurrentItem(position);
+    }
 
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragments = new ArrayList<>();

@@ -33,6 +33,7 @@
     <string name="see_balance">See Balance ></string>
     <string name="coupon_box">Coupon Box</string>
     <string name="invite_friends">Invite Friends</string>
+    <string name="banner_invite_friends">Invite friends \n&amp; get reward point</string>
 
     <string name="no_internet_connection">No Internet Connection</string>
 
@@ -170,5 +171,8 @@
     </string>
 
 
-    <string name="server_client_id">258127538400-3slou6dnqb0n5p98rs4b5cvhg62utjg1.apps.googleusercontent.com</string>
+    <string name="server_client_id">768403305833-3pg3hc3ek1maqemkmkoofefguvogn3oe.apps.googleusercontent.com</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -81,7 +81,7 @@ android {
 
 ext {
     // Android Support AppCompat
-    supportLibVersion = '24.0.0'
+    supportLibVersion = '24.1.1'
     // Butter Knife
     butterknifeLibVersion = '8.1.0'
     // Fonts Support

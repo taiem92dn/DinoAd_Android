@@ -47,6 +47,12 @@
             android:screenOrientation="nosensor"
             android:theme="@style/YoutubePlayerActivity"/>
 
+        <activity
+            android:name=".ui.activity.PointDetailActivity"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".ui.activity.InviteFriendActivity"
+                  android:theme="@style/AppTheme"/>
+
         <receiver
             android:name=".app.DinoAdminReceiver"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
@@ -66,8 +72,6 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <activity android:name=".ui.activity.PointDetailActivity"
-                  android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

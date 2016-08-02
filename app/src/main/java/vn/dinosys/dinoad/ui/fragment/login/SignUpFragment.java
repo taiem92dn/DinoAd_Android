@@ -103,7 +103,7 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(R.string.server_client_id))
+                .requestIdToken(getString(R.string.server_client_id))
                 .requestEmail()
                 .build();
 
@@ -200,7 +200,7 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
             GoogleSignInAccount acct = result.getSignInAccount();
             if (acct != null) {
 //                Log.d(TAG, acct.getDisplayName() + " " + acct.getEmail() + " " + acct.getId() + " " + acct);
-                mRuntime.saveUser(acct.getEmail(), acct.getServerAuthCode(), Constants.LoginType.GOOGLE.ordinal());
+                mRuntime.saveUser(acct.getEmail(), acct.getIdToken(), Constants.LoginType.GOOGLE.ordinal());
                 showSignUpSocialSuccess();
             }
             else {
