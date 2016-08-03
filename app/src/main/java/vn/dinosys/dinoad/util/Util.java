@@ -1,5 +1,7 @@
 package vn.dinosys.dinoad.util;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
@@ -59,5 +61,11 @@ public class Util {
                 = (ConnectivityManager) pContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public static void copyToClipboard(Context pContext, String text) {
+        ClipboardManager clipboard = (ClipboardManager) pContext.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("Copied Text", text);
+        clipboard.setPrimaryClip(clip);
     }
 }

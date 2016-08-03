@@ -125,6 +125,7 @@ dependencies {
 
     // Google Sign-In
     compile "com.google.android.gms:play-services-auth:${playServiceLibVersion}"
+    compile "com.google.android.gms:play-services:${playServiceLibVersion}"
 
     // Dependence Injection
     compile "com.google.dagger:dagger-compiler:${daggerLibVersion}"
