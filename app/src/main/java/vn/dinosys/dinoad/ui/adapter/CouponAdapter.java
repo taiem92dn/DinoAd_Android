@@ -8,27 +8,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.dinosys.dinoad.R;
-import vn.dinosys.dinoad.data.net.model.GiftCard;
+import vn.dinosys.dinoad.data.net.model.CouponItem;
+import vn.dinosys.dinoad.util.Util;
 
 /**
  * Created by huutai.
- * Since: 7/28/16 on 5:31 PM
+ * Since: 8/5/16 on 1:57 PM
  * Project: DinoAd
  */
-public class GiftCardAdapter extends BaseAdapter {
+public class CouponAdapter extends BaseAdapter {
 
-    private List<GiftCard> mData;
+    private List<CouponItem> mData;
 
-    public GiftCardAdapter(List<GiftCard> pBanners) {
+    public CouponAdapter(List<CouponItem> pBanners) {
         mData = pBanners;
     }
 
-    public void setData(List<GiftCard> pGiftCards) {
+    public void setData(List<CouponItem> pGiftCards) {
         if (pGiftCards != null) {
             mData = pGiftCards;
             notifyDataSetChanged();
@@ -41,7 +41,7 @@ public class GiftCardAdapter extends BaseAdapter {
     }
 
     @Override
-    public GiftCard getItem(int position) {
+    public CouponItem getItem(int position) {
         return mData.get(position);
     }
 
@@ -54,7 +54,7 @@ public class GiftCardAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup pViewGroup) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(pViewGroup.getContext()).inflate(R.layout.list_gift_detail_item, pViewGroup, false);
+            convertView = LayoutInflater.from(pViewGroup.getContext()).inflate(R.layout.list_coupon_item, pViewGroup, false);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         }
@@ -62,30 +62,29 @@ public class GiftCardAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        GiftCard giftCard = getItem(position);
-        if (giftCard.getDrawableId() != 0) {
-            holder.ivGiftCard.setImageResource(giftCard.getDrawableId());
+        CouponItem item = getItem(position);
+        if (item.getDrawableId() != 0) {
+            holder.ivCoupon.setImageResource(item.getDrawableId());
         }
-        holder.textGiftCard.setText(giftCard.getTitle());
-        holder.textGiftCardPrice.setText(String.format(Locale.US, "%,d", giftCard.getPrice()));
+        holder.textCoupon.setText(item.getTitle());
+        holder.textEndDate.setText(Util.dateTimeToString(item.getEndDate()));
 
         return convertView;
     }
 
     static class ViewHolder {
 
-        @BindView(R.id.ivGiftCard)
-        ImageView ivGiftCard;
+        @BindView(R.id.ivCoupon)
+        ImageView ivCoupon;
 
-        @BindView(R.id.textGiftCard)
-        TextView textGiftCard;
+        @BindView(R.id.textCoupon)
+        TextView textCoupon;
 
-        @BindView(R.id.textGiftCardPrice)
-        TextView textGiftCardPrice;
+        @BindView(R.id.textEndDate)
+        TextView textEndDate;
 
         ViewHolder(View pView) {
             ButterKnife.bind(this, pView);
         }
     }
 }
-

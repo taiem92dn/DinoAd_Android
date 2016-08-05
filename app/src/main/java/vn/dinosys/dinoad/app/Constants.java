@@ -23,6 +23,6 @@ public class Constants {
     }
 
     public enum GiftCardType {
-        Prepaid, Game
+        Prepaid, Game, Voucher
     }
 }

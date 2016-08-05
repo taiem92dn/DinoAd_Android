@@ -95,8 +95,8 @@ public class InviteFriendFragment extends BaseFragment {
         shareItems.add(new ShareItem(R.drawable.ic_google_round, Invite.Google.toString()));
         shareItems.add(new ShareItem(R.drawable.ic_facebook_round, Invite.Messenger.toString()));
         shareItems.add(new ShareItem(R.drawable.ic_email, Invite.Email.toString()));
-        shareItems.add(new ShareItem(R.drawable.ic_facebook_round, Invite.SMS.toString()));
-        shareItems.add(new ShareItem(R.drawable.ic_facebook_round, Invite.CopyURL.toString()));
+        shareItems.add(new ShareItem(R.drawable.ic_message, Invite.SMS.toString()));
+        shareItems.add(new ShareItem(R.drawable.ic_link, Invite.CopyURL.toString()));
 
         InviteFriendAdapter adapter = new InviteFriendAdapter(shareItems);
         mRvShare.setAdapter(adapter);

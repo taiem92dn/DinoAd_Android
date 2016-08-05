@@ -27,6 +27,8 @@ public class GiftFragment extends BaseFragment {
 
     public static final String TAG = GiftFragment.class.getSimpleName();
 
+    private int selectTab = -1;
+
     public static GiftFragment newInstance(String title) {
         GiftFragment fragment = new GiftFragment();
         Bundle bundle = new Bundle();
@@ -68,8 +70,22 @@ public class GiftFragment extends BaseFragment {
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (selectTab != -1) {
+            mViewPager.setCurrentItem(selectTab);
+        }
+    }
+
     public void setCurrentTab(int position) {
-        mViewPager.setCurrentItem(position);
+        if (mViewPager != null) {
+            mViewPager.setCurrentItem(position);
+        }
+        else {
+            selectTab = position;
+        }
     }
 
     static class Adapter extends FragmentPagerAdapter {

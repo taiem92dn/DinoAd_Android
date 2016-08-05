@@ -99,7 +99,7 @@ public class PointDetailAdapter extends BaseExpandableListAdapter {
 
         PointDetail pointDetail = getGroup(pI);
         holder.textTitle.setText(pointDetail.getTitle());
-        holder.textPrice.setText(String.format(Locale.getDefault(), "%,d đ", pointDetail.getPrice()));
+        holder.textPrice.setText(String.format(Locale.US, "%,d đ", pointDetail.getPrice()));
         if (getChildrenCount(pI) != 0) {
             holder.ivGroupIndicator.setVisibility(View.VISIBLE);
             if (isExpanded) {
@@ -148,7 +148,7 @@ public class PointDetailAdapter extends BaseExpandableListAdapter {
         }
         else {
             holder.textTitle.setText(pointDetail.getTitle());
-            holder.textPrice.setText(String.format(Locale.getDefault(), "%,d đ", pointDetail.getPrice()));
+            holder.textPrice.setText(String.format(Locale.US, "%,d đ", pointDetail.getPrice()));
         }
         return convertView;
     }

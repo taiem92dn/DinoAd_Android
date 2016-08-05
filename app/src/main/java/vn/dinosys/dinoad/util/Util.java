@@ -11,6 +11,11 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 /**
  * Created by huutai.
  * Since: 7/21/16 on 10:55 AM
@@ -67,5 +72,14 @@ public class Util {
         ClipboardManager clipboard = (ClipboardManager) pContext.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("Copied Text", text);
         clipboard.setPrimaryClip(clip);
+    }
+
+
+    public static String dateTimeToString(long time) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy - MM - dd", Locale.getDefault());
+        return dateFormat.format(calendar.getTime());
     }
 }

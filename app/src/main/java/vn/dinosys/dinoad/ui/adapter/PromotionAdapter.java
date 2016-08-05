@@ -8,11 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.dinosys.dinoad.R;
-import vn.dinosys.dinoad.data.net.model.Banner;
+import vn.dinosys.dinoad.data.net.model.PromotionItem;
 
 /**
  * Created by huutai.
@@ -21,15 +22,15 @@ import vn.dinosys.dinoad.data.net.model.Banner;
  */
 public class PromotionAdapter extends BaseAdapter {
 
-    private List<Banner> mData;
+    private List<PromotionItem> mData;
 
-    public PromotionAdapter(List<Banner> pBanners) {
-        mData = pBanners;
+    public PromotionAdapter(List<PromotionItem> pPromotionItems) {
+        mData = pPromotionItems;
     }
 
-    public void setData(List<Banner> pBanners) {
-        if (pBanners != null) {
-            mData = pBanners;
+    public void setData(List<PromotionItem> pPromotionItems) {
+        if (pPromotionItems != null) {
+            mData = pPromotionItems;
             notifyDataSetChanged();
         }
     }
@@ -40,7 +41,7 @@ public class PromotionAdapter extends BaseAdapter {
     }
 
     @Override
-    public Banner getItem(int position) {
+    public PromotionItem getItem(int position) {
         return mData.get(position);
     }
 
@@ -61,6 +62,11 @@ public class PromotionAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        PromotionItem item = getItem(position);
+        holder.ivPromotion.setImageResource(item.getDrawableId());
+        holder.textPromotionName.setText(item.getPromotionName());
+        holder.textPromotionPrice.setText(String.format(Locale.US, "%,d đ", item.getPrice()));
+        holder.textPromotionDesc.setText(item.getPromotionDesc());
 
         return convertView;
     }

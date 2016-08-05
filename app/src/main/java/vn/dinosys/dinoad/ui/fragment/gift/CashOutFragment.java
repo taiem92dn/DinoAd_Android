@@ -56,4 +56,9 @@ public class CashOutFragment extends BaseFragment {
     public void onClickGameCard(View pView) {
         GiftDetailActivity.show(getActivity(), Constants.GiftCardType.Game);
     }
+
+    @OnClick(R.id.flVoucher)
+    public void onClickVoucher(View pView) {
+        GiftDetailActivity.show(getActivity(), Constants.GiftCardType.Voucher);
+    }
 }

@@ -134,7 +134,7 @@ public class PointDetailFragment  extends BaseFragment {
 
         View headerView = LayoutInflater.from(getContext()).inflate(R.layout.layout_header_point_detail, null);
         mTextTotalPoint = (TextView) headerView.findViewById(R.id.textTotalPoint);
-        mTextTotalPoint.setText(String.format(Locale.getDefault(), "%,d", 13125));
+        mTextTotalPoint.setText(String.format(Locale.US, "%,d", 13125));
 
         mElvPointDetail.addHeaderView(headerView);
 

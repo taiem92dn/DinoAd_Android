@@ -25,6 +25,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import vn.dinosys.dinoad.R;
 import vn.dinosys.dinoad.app.Constants;
 import vn.dinosys.dinoad.app.DinoAdApplication;
+import vn.dinosys.dinoad.app.LockScreenService;
 import vn.dinosys.dinoad.app.Runtime;
 import vn.dinosys.dinoad.ui.activity.login.LoginActivity;
 import vn.dinosys.dinoad.util.DialogHelper;
@@ -53,13 +54,13 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
 
     public static final String KEY_ACTIVE_LOCK_SCREEN = "active_lock_screen";
     public static final String KEY_DELETE_ACCOUNT = "delete_account";
-    private AlertDialog mInactiveLockscreenDialog;
+    private AlertDialog mInactiveLockScreenDialog;
 
     @Override
     public void onCreatePreferences(Bundle pBundle, String pS) {
         addPreferencesFromResource(R.xml.pref_setting);
 
-        mInactiveLockscreenDialog = createInactiveLockScreenDialog();
+        mInactiveLockScreenDialog = createInactiveLockScreenDialog();
         for(int x = 0; x < getPreferenceScreen().getPreferenceCount(); x++){
             PreferenceCategory preferenceCategory = (PreferenceCategory) getPreferenceScreen().getPreference(x);
             for(int y = 0; y < preferenceCategory.getPreferenceCount(); y++){
@@ -93,9 +94,11 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
         if (key.equals(KEY_ACTIVE_LOCK_SCREEN)) {
 //            Toast.makeText(getContext(), "active lock screen " + pSharedPreferences.getBoolean(key, false), Toast.LENGTH_SHORT)
 //                    .show();
-            if (!pSharedPreferences.getBoolean(key, false)) {
-                mInactiveLockscreenDialog.show();
-            }
+//            if (!pSharedPreferences.getBoolean(key, false)) {
+//                mInactiveLockScreenDialog.show();
+//            }
+
+            activeLockScreen(pSharedPreferences.getBoolean(key, false));
         }
     }
 
@@ -114,6 +117,17 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
         builder.setNegativeButton(android.R.string.cancel, null);
 
         return builder.create();
+    }
+
+    public void activeLockScreen(boolean enable) {
+        Intent intent = new Intent(getActivity(), LockScreenService.class);
+
+        if (enable) {
+            getActivity().startService(intent);
+        }
+        else {
+            getActivity().stopService(intent);
+        }
     }
 
     @Override

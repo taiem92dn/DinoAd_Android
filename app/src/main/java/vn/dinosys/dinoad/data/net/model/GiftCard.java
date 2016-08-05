@@ -7,21 +7,37 @@ package vn.dinosys.dinoad.data.net.model;
  */
 public class GiftCard {
 
-    private String mTitle;
+    private int drawableId;
+
+    private String title;
 
     private int price;
 
+    public GiftCard(int pDrawableId, String pTitle, int pPrice) {
+        drawableId = pDrawableId;
+        title = pTitle;
+        price = pPrice;
+    }
+
     public GiftCard(String pTitle, int pPrice) {
         price = pPrice;
-        mTitle = pTitle;
+        title = pTitle;
+    }
+
+    public int getDrawableId() {
+        return drawableId;
+    }
+
+    public void setDrawableId(int pDrawableId) {
+        drawableId = pDrawableId;
     }
 
     public String getTitle() {
-        return mTitle;
+        return title;
     }
 
     public void setTitle(String pTitle) {
-        mTitle = pTitle;
+        title = pTitle;
     }
 
     public int getPrice() {

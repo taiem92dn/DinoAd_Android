@@ -77,6 +77,8 @@ public class GiftDetailFragment extends BaseFragment {
                 actionBar.setTitle(R.string.prepaid_card);
             } else if (mGiftCardType == Constants.GiftCardType.Game) {
                 actionBar.setTitle(R.string.game_card);
+            } else if (mGiftCardType == Constants.GiftCardType.Voucher) {
+                actionBar.setTitle(R.string.voucher);
             }
         }
     }
@@ -87,24 +89,27 @@ public class GiftDetailFragment extends BaseFragment {
         GiftCardAdapter adapter = new GiftCardAdapter(giftCards);
 
         if (mGiftCardType == Constants.GiftCardType.Prepaid) {
-            giftCards.add(new GiftCard("Vinaphone 20,000 VND", 20000));
-            giftCards.add(new GiftCard("Mobifone 20,000 VND", 20000));
-            giftCards.add(new GiftCard("Viettel 20,000 VND", 20000));
-            giftCards.add(new GiftCard("Vietnamobile 20,000 VND", 20000));
-            giftCards.add(new GiftCard("Vinaphone 50,000 VND", 50000));
-            giftCards.add(new GiftCard("Mobifone 50,000 VND", 50000));
-            giftCards.add(new GiftCard("Viettel 50,000 VND", 50000));
-            giftCards.add(new GiftCard("Vietnamobile 50,000 VND", 50000));
+            giftCards.add(new GiftCard(R.drawable.card_vinaphone, "Vinaphone 20,000 VND", 20000));
+            giftCards.add(new GiftCard(R.drawable.card_mobifone, "Mobifone 20,000 VND", 20000));
+            giftCards.add(new GiftCard(R.drawable.card_viettel, "Viettel 20,000 VND", 20000));
+            giftCards.add(new GiftCard(R.drawable.card_vietnamobile, "Vietnamobile 20,000 VND", 20000));
+            giftCards.add(new GiftCard(R.drawable.card_vinaphone, "Vinaphone 50,000 VND", 50000));
+            giftCards.add(new GiftCard(R.drawable.card_mobifone, "Mobifone 50,000 VND", 50000));
+            giftCards.add(new GiftCard(R.drawable.card_viettel, "Viettel 50,000 VND", 50000));
+            giftCards.add(new GiftCard(R.drawable.card_vietnamobile, "Vietnamobile 50,000 VND", 50000));
         }
         else if (mGiftCardType == Constants.GiftCardType.Game) {
-            giftCards.add(new GiftCard("Gate 20,000 VND", 20000));
-            giftCards.add(new GiftCard("Vcoin 20,000 VND", 20000));
-            giftCards.add(new GiftCard("Zing 20,000 VND", 20000));
-            giftCards.add(new GiftCard("Garena 20,000 VND", 20000));
-            giftCards.add(new GiftCard("Gate 50,000 VND", 50000));
-            giftCards.add(new GiftCard("Vcoin 50,000 VND", 50000));
-            giftCards.add(new GiftCard("Zing 50,000 VND", 50000));
-            giftCards.add(new GiftCard("Garena 50,000 VND", 50000));
+            giftCards.add(new GiftCard(R.drawable.card_gate, "Gate 20,000 VND", 20000));
+            giftCards.add(new GiftCard(R.drawable.card_vcoin, "Vcoin 20,000 VND", 20000));
+            giftCards.add(new GiftCard(R.drawable.card_zing, "Zing 20,000 VND", 20000));
+            giftCards.add(new GiftCard(R.drawable.card_garena, "Garena 20,000 VND", 20000));
+            giftCards.add(new GiftCard(R.drawable.card_gate, "Gate 50,000 VND", 50000));
+            giftCards.add(new GiftCard(R.drawable.card_vcoin, "Vcoin 50,000 VND", 50000));
+            giftCards.add(new GiftCard(R.drawable.card_zing, "Zing 50,000 VND", 50000));
+            giftCards.add(new GiftCard(R.drawable.card_garena, "Garena 50,000 VND", 50000));
+        }
+        else if (mGiftCardType == Constants.GiftCardType.Voucher) {
+            giftCards.add(new GiftCard(R.drawable.starbucks_coffee, "Ly cà phê Starbucks 100,000 VND", 100000));
         }
 
         mListView.setAdapter(adapter);

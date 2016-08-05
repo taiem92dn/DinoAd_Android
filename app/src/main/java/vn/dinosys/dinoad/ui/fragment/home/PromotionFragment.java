@@ -12,7 +12,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import vn.dinosys.dinoad.R;
-import vn.dinosys.dinoad.data.net.model.Banner;
+import vn.dinosys.dinoad.data.net.model.PromotionItem;
+import vn.dinosys.dinoad.ui.activity.lockscreen.YoutubePlayerActivity;
 import vn.dinosys.dinoad.ui.adapter.PromotionAdapter;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
 
@@ -53,14 +54,22 @@ public class PromotionFragment extends BaseFragment {
     }
 
     private void setupUI() {
-        List<Banner> banners = new ArrayList<>();
-        banners.add(new Banner());
-        banners.add(new Banner());
-        banners.add(new Banner());
-        banners.add(new Banner());
-        banners.add(new Banner());
-        mAdapter = new PromotionAdapter(banners);
+        List<PromotionItem> promotionItems = new ArrayList<>();
+        promotionItems.add(new PromotionItem(R.drawable.app1, "Father.IO",500));
+        promotionItems.add(new PromotionItem(R.drawable.app2, "BADLAND 2",800));
+        promotionItems.add(new PromotionItem(R.drawable.app3, "diep.io",1000));
+        promotionItems.add(new PromotionItem(R.drawable.app4, "Lux Manager",700));
+        promotionItems.add(new PromotionItem(R.drawable.app5, "MOBA Legends",600));
+        promotionItems.add(new PromotionItem(R.drawable.app6, "TechnoStrike",500));
+        promotionItems.add(new PromotionItem(R.drawable.ic_video, "Watch Video", "Video", 100));
+
+        mAdapter = new PromotionAdapter(promotionItems);
         mListView.setAdapter(mAdapter);
 
+        mListView.setOnItemClickListener((pAdapterView, pView, pI, pL) -> {
+            if (promotionItems.get(pI).getDrawableId() == R.drawable.ic_video) {
+                startActivity(YoutubePlayerActivity.createIntent(getContext(), "-GlZvDxv9pA"));
+            }
+        });
     }
 }

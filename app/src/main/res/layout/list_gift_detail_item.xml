@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:gravity="center_vertical"
     android:padding="@dimen/default_margin_normal">
 
     <ImageView
@@ -11,7 +12,7 @@
         android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_marginRight="@dimen/default_margin_normal"
-        android:background="@color/lightGrey"/>
+        android:src="@drawable/card_mobifone"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

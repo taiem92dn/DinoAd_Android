@@ -16,7 +16,7 @@
             android:id="@+id/ivPromotion"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/com_facebook_profile_picture_blank_square"/>
+            android:src="@drawable/app1"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -68,8 +68,11 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="delete_account">Delete Account</string>
 
+    <string name="voucher">Voucher</string>
     <string name="prepaid_card">Prepaid Card</string>
     <string name="game_card">Game Card</string>
+    <string name="end_date">End date : </string>
+    <string name="coupon_count">You have %d coupons.</string>
 
     <string name="inactive_lock_screen_question">Inactive lockscreen?</string>
     <string-array name="inactive_lock_screen">

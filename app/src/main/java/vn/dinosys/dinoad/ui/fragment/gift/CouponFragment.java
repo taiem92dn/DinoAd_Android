@@ -5,8 +5,17 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import butterknife.BindView;
 import vn.dinosys.dinoad.R;
+import vn.dinosys.dinoad.data.net.model.CouponItem;
+import vn.dinosys.dinoad.ui.adapter.CouponAdapter;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
 
 /**
@@ -24,6 +33,12 @@ public class CouponFragment extends BaseFragment {
         return fragment;
     }
 
+    @BindView(R.id.list)
+    ListView mListView;
+
+    @BindView(R.id.textCouponCount)
+    TextView mTextCouponCount;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,6 +55,16 @@ public class CouponFragment extends BaseFragment {
     }
 
     private void setupUI() {
+        List<CouponItem> couponItems = new ArrayList<>();
+        couponItems.add(new CouponItem(R.drawable.card_mobifone, "Mobifont 20,000 VND", 1546242660000l));
+        couponItems.add(new CouponItem(R.drawable.card_viettel, "Viettel 50,000 VND", 1546242660000l));
+        couponItems.add(new CouponItem(R.drawable.card_garena, "Viettel 50,000 VND", 1546242660000l));
+        couponItems.add(new CouponItem(R.drawable.card_viettel, "Viettel 20,000 VND", 1546242660000l));
+        couponItems.add(new CouponItem(R.drawable.card_vinaphone, "Viettel 20,000 VND", 1546242660000l));
+        couponItems.add(new CouponItem(R.drawable.card_viettel, "Viettel 20,000 VND", 1546242660000l));
 
+        mListView.setAdapter(new CouponAdapter(couponItems));
+
+        mTextCouponCount.setText(String.format(Locale.US, getString(R.string.coupon_count), couponItems.size()));
     }
 }
