@@ -74,6 +74,8 @@
     <string name="end_date">End date : </string>
     <string name="coupon_count">You have %d coupons.</string>
 
+    <string name="point_reward">%,d points is reward.</string>
+
     <string name="inactive_lock_screen_question">Inactive lockscreen?</string>
     <string-array name="inactive_lock_screen">
         <item>Inactive for 2 hours</item>

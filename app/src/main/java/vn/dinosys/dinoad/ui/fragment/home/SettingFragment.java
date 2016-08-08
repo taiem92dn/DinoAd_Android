@@ -52,8 +52,6 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
         return fragment;
     }
 
-    public static final String KEY_ACTIVE_LOCK_SCREEN = "active_lock_screen";
-    public static final String KEY_DELETE_ACCOUNT = "delete_account";
     private AlertDialog mInactiveLockScreenDialog;
 
     @Override
@@ -74,6 +72,7 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
                 Constants.LoginType.values()[mRuntime.getLoginType()] == Constants.LoginType.GOOGLE) {
             initGoogleApiClient();
         }
+
     }
 
     @Override
@@ -91,7 +90,7 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
     @Override
     public void onSharedPreferenceChanged(SharedPreferences pSharedPreferences, String key) {
 
-        if (key.equals(KEY_ACTIVE_LOCK_SCREEN)) {
+        if (key.equals(Constants.KEY_ACTIVE_LOCK_SCREEN)) {
 //            Toast.makeText(getContext(), "active lock screen " + pSharedPreferences.getBoolean(key, false), Toast.LENGTH_SHORT)
 //                    .show();
 //            if (!pSharedPreferences.getBoolean(key, false)) {
@@ -134,7 +133,7 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
     public boolean onPreferenceClick(Preference pPreference) {
         Log.d(TAG, pPreference.getKey() + " click");
         if ( pPreference.getKey() != null &&
-                pPreference.getKey().equals(KEY_DELETE_ACCOUNT)) {
+                pPreference.getKey().equals(Constants.KEY_DELETE_ACCOUNT)) {
             DialogHelper.createConfirmDialog(getContext(), "Confirm", "Do you want to log out?"
                     , this::signOut)
             .show();
@@ -210,6 +209,8 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
         mRuntime.logOut();
         getActivity().finish();
         startActivity(new Intent(getActivity(), LoginActivity.class));
+
+        activeLockScreen(false);
     }
 
     public void disconnectFromFacebook() {

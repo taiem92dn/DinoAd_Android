@@ -7,6 +7,7 @@ import vn.dinosys.dinoad.R;
 import vn.dinosys.dinoad.di.component.AppComponent;
 import vn.dinosys.dinoad.di.component.DaggerAppComponent;
 import vn.dinosys.dinoad.di.module.AppModule;
+import vn.dinosys.dinoad.util.NotificationHelper;
 
 /**
  * Created by htsi.
@@ -32,6 +33,8 @@ public class DinoAdApplication extends MultiDexApplication {
         super.onCreate();
 
         this.mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+
+        NotificationHelper.init(this);
 
         //  Set default font to MyriadPro
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()

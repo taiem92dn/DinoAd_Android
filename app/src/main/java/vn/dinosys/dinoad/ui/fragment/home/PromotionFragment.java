@@ -68,7 +68,7 @@ public class PromotionFragment extends BaseFragment {
 
         mListView.setOnItemClickListener((pAdapterView, pView, pI, pL) -> {
             if (promotionItems.get(pI).getDrawableId() == R.drawable.ic_video) {
-                startActivity(YoutubePlayerActivity.createIntent(getContext(), "-GlZvDxv9pA"));
+                startActivity(YoutubePlayerActivity.createIntent(getContext(), "JRs1HKRPaWw"));
             }
         });
     }

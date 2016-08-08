@@ -18,6 +18,10 @@ public class Constants {
 
     public static final int RC_SIGN_IN_GOOGLE = 100;
 
+    public static final String KEY_ACTIVE_LOCK_SCREEN = "active_lock_screen";
+    public static final String KEY_DELETE_ACCOUNT = "delete_account";
+
+
     public enum LoginType {
         FACEBOOK, GOOGLE, EMAIL
     }
