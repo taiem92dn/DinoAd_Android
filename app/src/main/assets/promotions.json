@@ -1,0 +1,66 @@
+[
+  {
+    "type":"AppRun",
+    "imgUrl":"https://lh4.ggpht.com/v2dJ3m-5XwItIEfBQnARihFrI7o1jAPHaBEpTr8BQImceKrEIt5CvDGpGaOrjePVdGOz=w300-rw",
+    "url":"com.mobile.bizo.reverse",
+    "promotionName":"Reverse Movie FX",
+    "promotionDesc":"Install and run",
+    "bonusPoint":500
+  },
+  {
+    "type":"AppInstall",
+    "imgUrl":"https://lh5.ggpht.com/CEGZEt1v87lGGLMu-91ZguYayHjRmU0Mt8_ZyD-HY0LqK-2pYrdbjQCgD9S_cvSavlQ=w300-rw",
+    "url":"com.frogmind.badland",
+    "promotionName":"BADLAND 2",
+    "promotionDesc":"Just install",
+    "bonusPoint":800
+  },
+  {
+    "type":"AppRun",
+    "imgUrl":"https://lh3.googleusercontent.com/yLOgFUr10eBDEXvJbleaSiilkW9jTaOGGMKM9KMZZ7Rc8dUaJRPAlCrne3p1bHvuCzA=w300-rw",
+    "url":"com.miniclip.diep.io",
+    "promotionName":"diep.io",
+    "promotionDesc":"Install and run",
+    "bonusPoint":1000
+  },
+  {
+    "type":"AppInstall",
+    "imgUrl":"https://lh3.googleusercontent.com/o65OVdsaaLv_YWWmagmHFZDLCfyFrbULVTAVGhHu0WBdDxf_33UapcANW8-B5bsLVtla=w300-rw",
+    "url":"com.samsung.android.app.sbottle",
+    "promotionName":"Lux Manager",
+    "promotionDesc":"Just install",
+    "bonusPoint":300
+  },
+  {
+    "type":"AppRun",
+    "imgUrl":"https://lh5.ggpht.com/ykBVajH8-zaDKoTJOAibbtHn3FbBKWosylkpztoernVySDuG-hx-03UMPYt1b_uI0IQ=w300-rw",
+    "url":"com.intsig.camscanner",
+    "promotionName":"CamScanner",
+    "promotionDesc":"Install and run",
+    "bonusPoint":600
+  },
+  {
+    "type":"AppRun",
+    "imgUrl":"https://lh3.googleusercontent.com/JNMh5wXlAVq67VpBTh5lsP3Vz6ZQ-1ciV1yBzaleLlZ1ux83lDUfGRnQzDNjhZUYME7y=w300-rw",
+    "url":"com.Unis.ShootGame",
+    "promotionName":"TechnoStrike",
+    "promotionDesc":"Install and run",
+    "bonusPoint":500
+  },
+  {
+    "type":"AppRun",
+    "imgUrl":"https://lh3.googleusercontent.com/2MY7RPGU9i3ErSMJaKlWeP2DNdNvKtvkZ1G2hrV-c45_-hHqnFZPZr1vCH3s7f0Bx_k=w300-rw",
+    "url":"htsi.com.vlottery",
+    "promotionName":"Viet Lottery",
+    "promotionDesc":"Install and run",
+    "bonusPoint":1000
+  },
+  {
+    "type":"Video",
+    "imgUrl":"",
+    "url":"JRs1HKRPaWw",
+    "promotionName":"Watch Video",
+    "promotionDesc":"Video",
+    "bonusPoint":500
+  }
+]

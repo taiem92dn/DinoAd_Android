@@ -151,4 +151,7 @@ dependencies {
     compile files('libs/YouTubeAndroidPlayerApi.jar')
     // Facebook
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    // AndroidProcesses
+    compile 'com.jaredrummler:android-processes:1.0.8'
 }

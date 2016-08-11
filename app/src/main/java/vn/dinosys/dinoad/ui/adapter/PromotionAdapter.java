@@ -13,7 +13,9 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.dinosys.dinoad.R;
+import vn.dinosys.dinoad.app.Constants;
 import vn.dinosys.dinoad.data.net.model.PromotionItem;
+import vn.dinosys.dinoad.util.ImageLoaderUtil;
 
 /**
  * Created by huutai.
@@ -63,10 +65,15 @@ public class PromotionAdapter extends BaseAdapter {
         }
 
         PromotionItem item = getItem(position);
-        holder.ivPromotion.setImageResource(item.getDrawableId());
         holder.textPromotionName.setText(item.getPromotionName());
-        holder.textPromotionPrice.setText(String.format(Locale.US, "%,d đ", item.getPrice()));
+        holder.textPromotionPrice.setText(String.format(Locale.US, "%,d đ", item.getBonusPoint()));
         holder.textPromotionDesc.setText(item.getPromotionDesc());
+        if (item.getType().equals(Constants.PromotionType.Video.toString())) {
+            holder.ivPromotion.setImageResource(R.drawable.ic_video);
+        }
+        else {
+            ImageLoaderUtil.loadImage(pViewGroup.getContext(), item.getImgUrl(), holder.ivPromotion);
+        }
 
         return convertView;
     }

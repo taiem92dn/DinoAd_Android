@@ -1,5 +1,7 @@
 package vn.dinosys.dinoad.data.net.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by huutai.
  * Since: 8/4/16 on 2:54 PM
@@ -7,29 +9,52 @@ package vn.dinosys.dinoad.data.net.model;
  */
 public class PromotionItem {
 
+    @SerializedName("type")
+    private String type;
+
+    @SerializedName("imgUrl")
     private String imgUrl;
 
     private int drawableId;
 
+    @SerializedName("url")
+    private String url;
+
+    @SerializedName("promotionName")
     private String promotionName;
 
+    @SerializedName("promotionDesc")
     private String promotionDesc;
 
-    private int price;
-
-    public PromotionItem(int pDrawableId, String pPromotionName, int pPrice) {
-        drawableId = pDrawableId;
-        promotionName = pPromotionName;
-        price = pPrice;
-        promotionDesc = "Install and run";
-    }
-
-    public PromotionItem(int pDrawableId, String pPromotionName, String pPromotionDesc, int pPrice) {
-        drawableId = pDrawableId;
-        promotionName = pPromotionName;
-        promotionDesc = pPromotionDesc;
-        price = pPrice;
-    }
+    @SerializedName("bonusPoint")
+    private int bonusPoint;
+//
+//    public PromotionItem(Constants.PromotionType pType, int pDrawableId, String pUrl, String pPromotionName, int pBonusPoint) {
+//        type = pType;
+//        drawableId = pDrawableId;
+//        url = pUrl;
+//        promotionName = pPromotionName;
+//        bonusPoint = pBonusPoint;
+//        promotionDesc = "Install and run";
+//    }
+//
+//    public PromotionItem(Constants.PromotionType pType, String pImgUrl, String pUrl, String pPromotionName, int pBonusPoint) {
+//        type = pType;
+//        imgUrl = pImgUrl;
+//        url = pUrl;
+//        promotionName = pPromotionName;
+//        bonusPoint = pBonusPoint;
+//        promotionDesc = "Install and run";
+//    }
+//
+//    public PromotionItem(Constants.PromotionType pType, int pDrawableId, String pUrl, String pPromotionName, String pPromotionDesc, int pBonusPoint) {
+//        type = pType;
+//        drawableId = pDrawableId;
+//        url = pUrl;
+//        promotionName = pPromotionName;
+//        promotionDesc = pPromotionDesc;
+//        bonusPoint = pBonusPoint;
+//    }
 
     public int getDrawableId() {
         return drawableId;
@@ -63,11 +88,27 @@ public class PromotionItem {
         promotionDesc = pPromotionDesc;
     }
 
-    public int getPrice() {
-        return price;
+    public int getBonusPoint() {
+        return bonusPoint;
     }
 
-    public void setPrice(int pPrice) {
-        price = pPrice;
+    public void setBonusPoint(int pBonusPoint) {
+        bonusPoint = pBonusPoint;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String pType) {
+        type = pType;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String pUrl) {
+        url = pUrl;
     }
 }

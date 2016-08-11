@@ -19,6 +19,7 @@ public class Constants {
     public static final int RC_SIGN_IN_GOOGLE = 100;
 
     public static final String KEY_ACTIVE_LOCK_SCREEN = "active_lock_screen";
+    public static final String KEY_NOTIFY_REWARDS = "notify_rewards";
     public static final String KEY_DELETE_ACCOUNT = "delete_account";
 
 
@@ -28,5 +29,9 @@ public class Constants {
 
     public enum GiftCardType {
         Prepaid, Game, Voucher
+    }
+
+    public enum PromotionType {
+        Video, AppRun, AppInstall
     }
 }

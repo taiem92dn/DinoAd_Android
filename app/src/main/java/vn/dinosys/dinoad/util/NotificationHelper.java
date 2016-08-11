@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -13,6 +14,7 @@ import android.util.Log;
 import java.util.Locale;
 
 import vn.dinosys.dinoad.R;
+import vn.dinosys.dinoad.app.Constants;
 import vn.dinosys.dinoad.ui.activity.home.HomeActivity;
 
 /**
@@ -83,7 +85,12 @@ public class NotificationHelper {
     }
 
     public void sendNotificationReward(int point) {
-        String message = String.format(Locale.US, mContext.getString(R.string.point_reward), point);
-        sendNotification(message, NotificationType.REWARD.ordinal());
+        String sharePreferencesName = mContext.getPackageName() + "_preferences";
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(sharePreferencesName, Context.MODE_PRIVATE);
+        boolean notifyReward = sharedPreferences.getBoolean(Constants.KEY_NOTIFY_REWARDS, false);
+        if (notifyReward) {
+            String message = String.format(Locale.US, mContext.getString(R.string.point_reward), point);
+            sendNotification(message, NotificationType.REWARD.ordinal());
+        }
     }
 }
