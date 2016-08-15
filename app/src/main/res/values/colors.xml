@@ -12,5 +12,5 @@
     <color name="colorPrimaryDark">#E64A19</color>
     <color name="colorAccent">#01579B</color>
     <color name="colorAccentAlpha">#8001579B</color>
-    <color name="bgChildColor">#EEEEEE</color>
+    <color name="bgGrey">#EEEEEE</color>
 </resources>

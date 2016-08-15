@@ -128,8 +128,8 @@ dependencies {
     compile "com.google.android.gms:play-services:${playServiceLibVersion}"
 
     // Dependence Injection
-    compile "com.google.dagger:dagger-compiler:${daggerLibVersion}"
     compile "com.google.dagger:dagger:${daggerLibVersion}"
+    apt "com.google.dagger:dagger-compiler:${daggerLibVersion}"
     // Annotation & Reactive
     compile "javax.annotation:jsr250-api:${javaxAnnotationLibVersion}"
     compile "io.reactivex:rxandroid:${rxAndroidLibVersion}"
@@ -154,4 +154,7 @@ dependencies {
 
     // AndroidProcesses
     compile 'com.jaredrummler:android-processes:1.0.8'
+
+    // Pick Image
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
 }

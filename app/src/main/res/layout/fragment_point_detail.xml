@@ -15,5 +15,5 @@
         android:layout_height="match_parent"
         android:groupIndicator="@null"
         android:childIndicator="@null"
-        android:childDivider="@color/bgChildColor"/>
+        android:childDivider="@color/bgGrey"/>
 </LinearLayout>

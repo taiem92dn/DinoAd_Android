@@ -27,6 +27,7 @@ import vn.dinosys.dinoad.app.Constants;
 import vn.dinosys.dinoad.app.DinoAdApplication;
 import vn.dinosys.dinoad.app.LockScreenService;
 import vn.dinosys.dinoad.app.Runtime;
+import vn.dinosys.dinoad.ui.activity.MyInfoActivity;
 import vn.dinosys.dinoad.ui.activity.login.LoginActivity;
 import vn.dinosys.dinoad.util.DialogHelper;
 
@@ -132,12 +133,18 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
     @Override
     public boolean onPreferenceClick(Preference pPreference) {
         Log.d(TAG, pPreference.getKey() + " click");
-        if ( pPreference.getKey() != null &&
-                pPreference.getKey().equals(Constants.KEY_DELETE_ACCOUNT)) {
+
+        if (pPreference.getKey() == null) return false;
+
+        if (pPreference.getKey().equals(Constants.KEY_DELETE_ACCOUNT)) {
             DialogHelper.createConfirmDialog(getContext(), "Confirm", "Do you want to log out?"
                     , this::signOut)
             .show();
         }
+        else if (pPreference.getKey().equals("my_info")) {
+            MyInfoActivity.show(getActivity());
+        }
+
         return false;
     }
 

@@ -12,6 +12,7 @@
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:theme="@style/AppTheme"
         android:supportsRtl="true">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -22,8 +23,7 @@
                   android:exported="true"/>
 
         <activity
-            android:name=".ui.activity.login.LoginActivity"
-            android:theme="@style/AppTheme">
+            android:name=".ui.activity.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -34,8 +34,7 @@
             android:name=".ui.activity.home.HomeActivity"
             android:theme="@style/HomeTheme"/>
         <activity
-            android:name=".ui.activity.gift.GiftDetailActivity"
-            android:theme="@style/AppTheme"/>
+            android:name=".ui.activity.gift.GiftDetailActivity"/>
         <activity
             android:name=".ui.activity.lockscreen.LockScreenActivity"
             android:theme="@style/LockScreenTheme">
@@ -52,11 +51,11 @@
             android:screenOrientation="nosensor"
             android:theme="@style/YoutubePlayerActivity"/>
 
-        <activity
-            android:name=".ui.activity.PointDetailActivity"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".ui.activity.InviteFriendActivity"
-                  android:theme="@style/AppTheme"/>
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
+
+        <activity android:name=".ui.activity.PointDetailActivity"/>
+        <activity android:name=".ui.activity.InviteFriendActivity"/>
+        <activity android:name=".ui.activity.MyInfoActivity"/>
 
         <receiver
             android:name=".app.DinoAdminReceiver"

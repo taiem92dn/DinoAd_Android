@@ -9,7 +9,7 @@
 
         <android.support.v7.preference.SwitchPreferenceCompat
             android:defaultValue="true"
-            android:key="notify_rewards"
+            android:key="@string/pref_notify_rewards"
             android:title="@string/notify_rewards"/>
     </android.support.v7.preference.PreferenceCategory>
 
@@ -17,7 +17,8 @@
         android:layout="@layout/divider_preference"
         android:title="category 2">
         <android.support.v7.preference.Preference
-            android:title="@string/my_info"/>
+            android:title="@string/my_info"
+            android:key="@string/pref_my_info"/>
     </android.support.v7.preference.PreferenceCategory>
 
     <android.support.v7.preference.PreferenceCategory
@@ -49,7 +50,7 @@
         android:title="category 5">
         <android.support.v7.preference.Preference
             android:title="@string/delete_account"
-            android:key="delete_account"/>
+            android:key="@string/pref_delete_account"/>
     </android.support.v7.preference.PreferenceCategory>
 
 </android.support.v7.preference.PreferenceScreen>

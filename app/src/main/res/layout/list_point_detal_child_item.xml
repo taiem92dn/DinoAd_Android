@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/default_margin_normal"
     android:paddingTop="@dimen/default_margin_normal"
     android:paddingBottom="@dimen/default_margin_normal"
-    android:background="@color/bgChildColor">
+    android:background="@color/bgGrey">
     <TextView
         android:id="@+id/textPointDetailTitle"
         android:layout_width="wrap_content"

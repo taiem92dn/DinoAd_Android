@@ -76,6 +76,24 @@
 
     <string name="point_reward">%,d points is reward.</string>
 
+    <string name="pref_active_lock_screen">active_lock_screen</string>
+    <string name="pref_notify_rewards">notify_rewards</string>
+    <string name="pref_delete_account">delete_account</string>
+    <string name="pref_my_info">my_info</string>
+    <string name="save">Save</string>
+    <string name="str_gender">Gender</string>
+    <string name="permission_denied">Permission denied</string>
+
+    <string-array name="str_gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
+    <string name="str_select_avatar">Select Avatar</string>
+    <string name="str_take_photo">Take photo</string>
+    <string name="str_pick_photo">Pick photo</string>
+
     <string name="inactive_lock_screen_question">Inactive lockscreen?</string>
     <string-array name="inactive_lock_screen">
         <item>Inactive for 2 hours</item>
@@ -84,6 +102,7 @@
         <item>Inactive for a day</item>
         <item>I will turn on later</item>
     </string-array>
+
 
     <string name="large_text">
         "Material is the metaphor.\n\n"
