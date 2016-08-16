@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright 2013 Philip Schiffer
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+<notices>
+    <notice>
+        <name>Dagger 2</name>
+        <url>https://github.com/google/dagger</url>
+        <copyright>Copyright 2012 Square, Inc.&lt;br/&gt;Copyright 2012 Google, Inc.</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>Butter Knife</name>
+        <url>http://jakewharton.github.io/butterknife/</url>
+        <copyright>Copyright 2013 Jake Wharton</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>Calligraphy</name>
+        <url>https://github.com/chrisjenx/Calligraphy</url>
+        <copyright>Copyright 2013 Christopher Jenkins</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>greenDAO</name>
+        <url>http://greenrobot.org/greendao/</url>
+        <copyright>Copyright (C) 2011-2016 Markus Junginger, greenrobot</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>Retrofit</name>
+        <url>http://square.github.io/retrofit/</url>
+        <copyright>Copyright 2013 Square, Inc.</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>Glide</name>
+        <url>https://github.com/bumptech/glide</url>
+        <copyright>Copyright 2014 Google, Inc. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are
+permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of
+conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list
+of conditions and the following disclaimer in the documentation and/or other materials
+provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY GOOGLE, INC. ``AS IS'' AND ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL GOOGLE, INC. OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+The views and conclusions contained in the software and documentation are those of the
+authors and should not be interpreted as representing official policies, either expressed
+or implied, of Google, Inc.</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>Slidr</name>
+        <url>https://github.com/r0adkll/Slidr</url>
+        <copyright>Copyright (c) 2014 Drew Heavner</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>Shimmer for Android</name>
+        <url>https://github.com/RomainPiel/Shimmer-android</url>
+        <copyright>Copyright 2014 Romain Piel</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>VerticalViewPager</name>
+        <url>https://github.com/castorflex/VerticalViewPager</url>
+        <copyright>"THE BEER-WARE LICENSE" (Revision 42):&lt;br/&gt;You can do whatever you want with this stuff.&lt;br/&gt;If we meet some day, and you think this stuff is worth it, you can buy me a beer in return.</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>BottomBar</name>
+        <url>https://github.com/roughike/BottomBar</url>
+        <copyright>BottomBar library for Android&lt;br/&gt;Copyright (c) 2016 Iiro Krankka (http://github.com/roughike).</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>CircleImageView</name>
+        <url>https://github.com/hdodenhof/CircleImageView</url>
+        <copyright>Copyright 2014 - 2016 Henning Dodenhof</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>YouTube Android Player API</name>
+        <url>https://developers.google.com/youtube/android/player/</url>
+        <copyright/>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>Facebook SDK</name>
+        <url>https://developers.facebook.com/docs/android/</url>
+        <copyright>
+/**
+* Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
+*
+* You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
+* copy, modify, and distribute this software in source code or binary form for use
+* in connection with the web services and APIs provided by Facebook.
+*
+* As with any software that integrates with the Facebook platform, your use of
+* this software is subject to the Facebook Developer Principles and Policies
+* [http://developers.facebook.com/policy/]. This copyright notice shall be
+* included in all copies or substantial portions of the software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+* FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+* COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+* IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+* CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>AndroidProcesses</name>
+        <url>https://github.com/jaredrummler/AndroidProcesses</url>
+        <copyright>Copyright (C) 2015 Jared Rummler</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>Android Crop</name>
+        <url>https://github.com/jdamcd/android-crop</url>
+        <copyright>Copyright 2016 SoundCloud</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <!--<notice>-->
+        <!--<name>Inscription</name>-->
+        <!--<url>https://github.com/MartinvanZ/Inscription</url>-->
+        <!--<copyright>(c) 2012 Martin van Zuilekom (http://martin.cubeactive.com)</copyright>-->
+        <!--<license>Apache Software License 2.0</license>-->
+    <!--</notice>-->
+    <!--<notice>-->
+        <!--<name>Cool Project with BSD License</name>-->
+        <!--<url>http://example.com</url>-->
+        <!--<copyright>Author of Cool Project with BSD License</copyright>-->
+        <!--<license>BSD 3-Clause License</license>-->
+    <!--</notice>-->
+</notices>

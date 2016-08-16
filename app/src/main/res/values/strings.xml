@@ -66,6 +66,7 @@
     <string name="partnership_inquiry">Partnership Inquiry</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
     <string name="privacy_policy">Privacy Policy</string>
+    <string name="open_source_licenses">Open source licenses</string>
     <string name="delete_account">Delete Account</string>
 
     <string name="voucher">Voucher</string>
@@ -80,6 +81,7 @@
     <string name="pref_notify_rewards">notify_rewards</string>
     <string name="pref_delete_account">delete_account</string>
     <string name="pref_my_info">my_info</string>
+    <string name="pref_open_source_licenses">open_source_licenses</string>
     <string name="save">Save</string>
     <string name="str_gender">Gender</string>
     <string name="permission_denied">Permission denied</string>

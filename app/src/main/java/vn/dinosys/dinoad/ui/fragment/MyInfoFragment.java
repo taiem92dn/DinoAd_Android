@@ -41,6 +41,8 @@ import java.util.TimeZone;
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.dinosys.dinoad.R;
+import vn.dinosys.dinoad.app.DinoAdApplication;
+import vn.dinosys.dinoad.app.Runtime;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
 import vn.dinosys.dinoad.util.BitmapUtil;
 
@@ -59,8 +61,8 @@ public class MyInfoFragment extends BaseFragment {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    @BindView(R.id.textEmail)
-    TextView mTextEmail;
+    @BindView(R.id.textUsername)
+    TextView mTextUsername;
 
     @BindView(R.id.imgAvatar)
     ImageView mImgAvatar;
@@ -119,6 +121,9 @@ public class MyInfoFragment extends BaseFragment {
     private void setUpUI() {
         initDatePicker();
         initGenderPicker();
+
+        Runtime runtime = DinoAdApplication.getInstance().getAppComponent().runtime();
+        mTextUsername.setText(runtime.getUsernameKey());
     }
 
     private void initDatePicker() {

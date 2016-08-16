@@ -22,6 +22,10 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import de.psdev.licensesdialog.LicensesDialog;
+import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20;
+import de.psdev.licensesdialog.licenses.License;
+import de.psdev.licensesdialog.model.Notice;
 import vn.dinosys.dinoad.R;
 import vn.dinosys.dinoad.app.Constants;
 import vn.dinosys.dinoad.app.DinoAdApplication;
@@ -136,16 +140,33 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
 
         if (pPreference.getKey() == null) return false;
 
-        if (pPreference.getKey().equals(Constants.KEY_DELETE_ACCOUNT)) {
+        if (pPreference.getKey().equals(getString(R.string.pref_delete_account))) {
             DialogHelper.createConfirmDialog(getContext(), "Confirm", "Do you want to log out?"
                     , this::signOut)
             .show();
         }
-        else if (pPreference.getKey().equals("my_info")) {
+        else if (pPreference.getKey().equals(getString(R.string.pref_my_info))) {
             MyInfoActivity.show(getActivity());
+        }
+        else if (pPreference.getKey().equals(getString(R.string.pref_open_source_licenses))) {
+            openLicensesDialog();
         }
 
         return false;
+    }
+
+    private void openLicensesDialog() {
+        final String name = "Open source licenses";
+        final String url = "DinoAd";
+        final String copyright = "Copyright 2016 Dinosys Corporation";
+        final License license = new ApacheSoftwareLicense20();
+        final Notice notice = new Notice(name, url, copyright, license);
+        new LicensesDialog.Builder(getContext())
+                .setTitle(R.string.open_source_licenses)
+                .setNotices(R.raw.notices)
+                .setIncludeOwnLicense(true)
+                .build()
+                .show();
     }
 
     public void initGoogleApiClient() {

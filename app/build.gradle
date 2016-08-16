@@ -157,4 +157,6 @@ dependencies {
 
     // Pick Image
     compile 'com.soundcloud.android:android-crop:1.0.1@aar'
+    // Open source licenses
+    compile 'de.psdev.licensesdialog:licensesdialog:1.8.1'
 }
