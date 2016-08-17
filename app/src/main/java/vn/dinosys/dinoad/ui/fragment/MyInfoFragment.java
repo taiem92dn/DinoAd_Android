@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,13 +39,17 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.dinosys.dinoad.R;
-import vn.dinosys.dinoad.app.DinoAdApplication;
-import vn.dinosys.dinoad.app.Runtime;
+import vn.dinosys.dinoad.data.database.table.dao.DaoSession;
+import vn.dinosys.dinoad.data.database.table.dao.UserInfo;
+import vn.dinosys.dinoad.di.component.AppComponent;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
 import vn.dinosys.dinoad.util.BitmapUtil;
+import vn.dinosys.dinoad.util.ImageLoaderUtil;
 
 /**
  * Created by huutai.
@@ -67,11 +72,17 @@ public class MyInfoFragment extends BaseFragment {
     @BindView(R.id.imgAvatar)
     ImageView mImgAvatar;
 
+    @BindView(R.id.editName)
+    EditText mEditName;
+
     @BindView(R.id.textGender)
     TextView mTextGender;
 
     @BindView(R.id.textBirthday)
     TextView mTextBirthday;
+
+    @Inject
+    DaoSession mDaoSession;
 
     static final int REQUEST_TAKE_PHOTO = 1;
 
@@ -89,6 +100,8 @@ public class MyInfoFragment extends BaseFragment {
     private File mCurrentPhotoFile;
 
     private Bitmap mBitmapAvatar;
+
+    private UserInfo mUserInfo;
 
     private Handler mHandler = new Handler();
 
@@ -119,26 +132,32 @@ public class MyInfoFragment extends BaseFragment {
     }
 
     private void setUpUI() {
+        initialize();
+
+        mUserInfo = mDaoSession.getUserInfoDao().queryBuilder().unique();
+        renderUserInfo(mUserInfo);
+
         initDatePicker();
         initGenderPicker();
+    }
 
-        Runtime runtime = DinoAdApplication.getInstance().getAppComponent().runtime();
-        mTextUsername.setText(runtime.getUsernameKey());
+    private void initialize() {
+        getComponent(AppComponent.class).inject(this);
     }
 
     private void initDatePicker() {
         Calendar calendar = new GregorianCalendar(TimeZone.getDefault());
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
 
-//        if (mUser.getBirthday() != null) {
-//            mBirthday = mUser.getBirthday();
-//            calendar.setTimeInMillis(mUser.getBirthday() * 1000);
-//            mTextBirthday.setText(sdf.format(calendar.getTime()));
-//            mBirthdayPickerDialog = new DatePickerDialog(getActivity(), mBirthdaySetListener,
-//                    calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-//        } else {
+        if (mUserInfo.getBirthday() != null) {
+            mBirthday = mUserInfo.getBirthday();
+            calendar.setTimeInMillis(mUserInfo.getBirthday() * 1000);
+            mTextBirthday.setText(sdf.format(calendar.getTime()));
+            mBirthdayPickerDialog = new DatePickerDialog(getActivity(), mBirthdaySetListener,
+                    calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        } else {
             mBirthdayPickerDialog = new DatePickerDialog(getActivity(), mBirthdaySetListener, 1990, 1, 1);
-//        }
+        }
 
     }
 
@@ -159,6 +178,13 @@ public class MyInfoFragment extends BaseFragment {
 //            dialog.dismiss();
             mTextGender.setText(genders[which]);
         });
+    }
+
+    private void renderUserInfo(UserInfo pUserInfo) {
+        mTextUsername.setText(pUserInfo.getUsername());
+        mEditName.setText(pUserInfo.getDisplayName());
+        mTextGender.setText(pUserInfo.getGender());
+        ImageLoaderUtil.loadImage(getContext(), pUserInfo.getAvatarUrl(), mImgAvatar);
     }
 
     @OnClick(R.id.llPhoto)

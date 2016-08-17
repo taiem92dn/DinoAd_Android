@@ -7,19 +7,29 @@ package vn.dinosys.dinoad.data.database.table.dao;
 public class UserInfo implements java.io.Serializable {
 
     private Long UserId;
+    private String Username;
+    private String AvatarUrl;
     private String DisplayName;
+    private String Gender;
+    private Long Birthday;
     private Short CountryCode;
     private String PhoneNumber;
+    private String Type;
     private String Platform;
 
     public UserInfo() {
     }
 
-    public UserInfo(Long UserId, String DisplayName, Short CountryCode, String PhoneNumber, String Platform) {
+    public UserInfo(Long UserId, String Username, String AvatarUrl, String DisplayName, String Gender, Long Birthday, Short CountryCode, String PhoneNumber, String Type, String Platform) {
         this.UserId = UserId;
+        this.Username = Username;
+        this.AvatarUrl = AvatarUrl;
         this.DisplayName = DisplayName;
+        this.Gender = Gender;
+        this.Birthday = Birthday;
         this.CountryCode = CountryCode;
         this.PhoneNumber = PhoneNumber;
+        this.Type = Type;
         this.Platform = Platform;
     }
 
@@ -31,12 +41,44 @@ public class UserInfo implements java.io.Serializable {
         this.UserId = UserId;
     }
 
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String Username) {
+        this.Username = Username;
+    }
+
+    public String getAvatarUrl() {
+        return AvatarUrl;
+    }
+
+    public void setAvatarUrl(String AvatarUrl) {
+        this.AvatarUrl = AvatarUrl;
+    }
+
     public String getDisplayName() {
         return DisplayName;
     }
 
     public void setDisplayName(String DisplayName) {
         this.DisplayName = DisplayName;
+    }
+
+    public String getGender() {
+        return Gender;
+    }
+
+    public void setGender(String Gender) {
+        this.Gender = Gender;
+    }
+
+    public Long getBirthday() {
+        return Birthday;
+    }
+
+    public void setBirthday(Long Birthday) {
+        this.Birthday = Birthday;
     }
 
     public Short getCountryCode() {
@@ -53,6 +95,14 @@ public class UserInfo implements java.io.Serializable {
 
     public void setPhoneNumber(String PhoneNumber) {
         this.PhoneNumber = PhoneNumber;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String Type) {
+        this.Type = Type;
     }
 
     public String getPlatform() {

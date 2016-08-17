@@ -23,9 +23,14 @@ public class DaoGenerator {
         note.implementsSerializable();
 
         note.addLongProperty("UserId");
+        note.addStringProperty("Username");
+        note.addStringProperty("AvatarUrl");
         note.addStringProperty("DisplayName");
+        note.addStringProperty("Gender");
+        note.addLongProperty("Birthday");
         note.addShortProperty("CountryCode");
         note.addStringProperty("PhoneNumber");
+        note.addStringProperty("Type");
         note.addStringProperty("Platform");
     }
 }

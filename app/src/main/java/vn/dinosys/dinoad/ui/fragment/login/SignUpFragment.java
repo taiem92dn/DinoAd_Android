@@ -34,6 +34,9 @@ import butterknife.OnClick;
 import vn.dinosys.dinoad.R;
 import vn.dinosys.dinoad.app.Constants;
 import vn.dinosys.dinoad.app.Runtime;
+import vn.dinosys.dinoad.data.database.table.dao.DaoSession;
+import vn.dinosys.dinoad.data.database.table.dao.UserInfo;
+import vn.dinosys.dinoad.data.database.table.dao.UserInfoDao;
 import vn.dinosys.dinoad.di.component.AppComponent;
 import vn.dinosys.dinoad.ui.activity.home.HomeActivity;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
@@ -61,6 +64,9 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
 
     @Inject
     Runtime mRuntime;
+
+    @Inject
+    DaoSession mDaoSession;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -201,6 +207,7 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
             if (acct != null) {
 //                Log.d(TAG, acct.getDisplayName() + " " + acct.getEmail() + " " + acct.getId() + " " + acct);
                 mRuntime.saveUser(acct.getEmail(), acct.getIdToken(), Constants.LoginType.GOOGLE.ordinal());
+                saveUserDb(acct.getEmail(), Constants.LoginType.GOOGLE.toString());
                 showSignUpSocialSuccess();
             }
             else {
@@ -222,6 +229,7 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
                         String email = object.getString("email");
 //                        String birthday = object.getString("birthday");
                         mRuntime.saveUser(email, accessToken.getToken(), Constants.LoginType.FACEBOOK.ordinal());
+                        saveUserDb(email, Constants.LoginType.FACEBOOK.toString());
                         showSignUpSocialSuccess();
                     } catch (JSONException pE) {
                         pE.printStackTrace();
@@ -233,6 +241,15 @@ public class SignUpFragment extends BaseFragment implements ISignUpView {
         parameters.putString("fields", "id,name,email,gender,birthday");
         request.setParameters(parameters);
         request.executeAsync();
+    }
+
+    private void saveUserDb(String username, String loginType) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername(username);
+        userInfo.setType(loginType);
+        UserInfoDao userInfoDao = mDaoSession.getUserInfoDao();
+        userInfoDao.insert(userInfo);
+
     }
 
     public void showSignUpSocialSuccess() {

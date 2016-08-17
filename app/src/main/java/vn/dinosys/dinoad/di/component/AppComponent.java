@@ -7,6 +7,7 @@ import vn.dinosys.dinoad.app.Runtime;
 import vn.dinosys.dinoad.data.net.repository.banner.IBannerRepository;
 import vn.dinosys.dinoad.di.module.AppModule;
 import vn.dinosys.dinoad.ui.activity.base.BaseActivity;
+import vn.dinosys.dinoad.ui.fragment.MyInfoFragment;
 import vn.dinosys.dinoad.ui.fragment.base.BaseFragment;
 import vn.dinosys.dinoad.ui.fragment.home.PromotionFragment;
 import vn.dinosys.dinoad.ui.fragment.home.SettingFragment;
@@ -34,4 +35,5 @@ public interface AppComponent {
     void inject(PromotionFragment pPromotionFragment);
     void inject(SignUpFragment pSignUpFragment);
     void inject(SettingFragment pSettingFragment);
+    void inject(MyInfoFragment pMyInfoFragment);
 }
